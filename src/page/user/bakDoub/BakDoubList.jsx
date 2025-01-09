@@ -30,7 +30,7 @@ export default function BakDoubList() {
 
   return (
     <div className="flex flex-col gap-5 p-6 bg-gray-50 rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-gray-700">BakDoub Answer</h1>
+      <h1 className="text-2xl font-bold text-gray-700">កំណែវិញ្ញាសារបាក់ឌុប</h1>
       <div>
         <SelectOption options={types} onSelectChange={handleSelectChange} />
       </div>

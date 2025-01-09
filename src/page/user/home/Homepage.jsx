@@ -1,5 +1,5 @@
 import Hero from "./components/Hero";
-import TeamWork from "./components/TeamWork";
+// import TeamWork from "./components/TeamWork";
 import WhoWeAre from "./components/WhoWeAre";
 import WhyYouChoose from "./components/WhyYouChoose";
 
@@ -10,7 +10,7 @@ export default function Homepage() {
       <Hero />
       <WhyYouChoose/>
       <WhoWeAre/>
-      <TeamWork/>
+      {/* <TeamWork/> */}
     </div>
   );
 }

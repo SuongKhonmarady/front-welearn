@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getQuestion } from "../../../../context/quiz/QuizAction";
 import Choice from "./Choice";
@@ -122,15 +122,16 @@ export default function DoQuiz() {
       )}
 
       {choiceId !== 0 && (
-        <div className="mt-4 flex justify-end">
+        <div className="mt-4 flex justify-start">
           <Button
-            customClass="bg-green-500 hover:bg-green-600"
+            customClass="bg-green-500 hover:bg-green-600 text-lg py-3 px-6 rounded-lg"
             onClick={handleNextQuestion}
           >
             Next Question
           </Button>
         </div>
       )}
+
     </div>
   );
 }

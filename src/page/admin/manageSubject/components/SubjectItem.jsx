@@ -1,14 +1,15 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { removeSubject } from "../../../../context/subject/SubjectAction";
 import Button from "../../../../ui/shared/Button";
+import PropTypes from 'prop-types';
 
 export default function BakDoubItem({ data, onRefresh }) {
   const { category, examdate, id } = data;
-  const [isUpdate, setIsUpdate] = useState(false);
+  // const [isUpdate, setIsUpdate] = useState(false);
 
   const removeBakDoub = async (id) => {
     const res = await removeSubject(id);
-    if (res === true) {
+    if (res === true && typeof onRefresh === "function") {
       onRefresh();
     }
   };
@@ -29,3 +30,15 @@ export default function BakDoubItem({ data, onRefresh }) {
     </li>
   );
 }
+BakDoubItem.propTypes = {
+  data: PropTypes.shape({
+    category: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    examdate: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+  onRefresh: PropTypes.func.isRequired,
+};
