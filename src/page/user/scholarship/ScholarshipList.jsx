@@ -1,9 +1,12 @@
 import { useContext, useEffect } from "react";
 import ScholarshipDataContext from "../../../context/scholarship/ScholarshipContext";
 import { getScholarship } from "../../../context/scholarship/Scholarship";
-import ScholarshipItem from "./components/ScholarshipItem";
+// import ScholarshipItem from "./components/ScholarshipItem";
+import ScholarshipTimeline from "./components/Scholarshiptimeline";
 import Spinner from "../../../ui/shared/Spinner";
-import NotFound from "../../../ui/shared/NotFound";
+// import NotFound from "../../../ui/shared/NotFound";
+import PropTypes from 'prop-types';
+import ScholarshipChat from './components/ScholarshipChat';
 
 export default function ScholarshipList() {
   const { listScholarship, dispatch, loading } = useContext(ScholarshipDataContext);
@@ -23,17 +26,19 @@ export default function ScholarshipList() {
 
   return (
     <div className="flex flex-col gap-5 p-6 bg-gray-50 rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-gray-700">Scholarships</h1>
-      {listScholarship.length ? (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {listScholarship.map((item) => (
-            <ScholarshipItem data={item} key={item.id} />
-            
-          ))}
-        </ul>
-      ) : (
-        <NotFound />
-      )}
+      <h1 className="text-2xl font-bold text-gray-700">Scholarships timeline</h1>
+      <ScholarshipTimeline scholarships={listScholarship} />
+      <h1 className="text-2xl font-bold mb-4">Scholarship Recommender</h1>
+      <ScholarshipChat />
     </div>
   );
 }
+ScholarshipTimeline.propTypes = {
+  scholarships: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+      deadline: PropTypes.string.isRequired, // Assuming deadline is a string; adjust if necessary
+    })
+  ).isRequired,
+};

@@ -2,14 +2,22 @@ import { toast } from "react-toastify";
 import apiClient from "../../utils/apiClient/apiClient";
 import axios from "axios";
 
-export const createScholarship = async (data, link) => {
+export const createScholarship = async (data, link, deadline, country) => {
   try {
+    // Format created time (post_at)
     const createdTime = new Date(data.created_time);
     const formattedDate = `${createdTime.getFullYear()}-${String(createdTime.getMonth() + 1).padStart(2, '0')}-${String(createdTime.getDate()).padStart(2, '0')} ${String(createdTime.getHours()).padStart(2, '0')}:${String(createdTime.getMinutes()).padStart(2, '0')}:${String(createdTime.getSeconds()).padStart(2, '0')}`;
-    const res = await apiClient.post("api/scholarship", {
+    
+    // Ensure the deadline is in the correct format (YYYY-MM-DD)
+    const formattedDeadline = new Date(deadline).toISOString().split('T')[0]; // Convert to YYYY-MM-DD
+
+    // Send API request to create scholarship
+    const res = await apiClient.post("api/scholarship/", {
       description: data.message,
       post_at: formattedDate,
       link,
+      deadline: formattedDeadline,  // Include the formatted deadline
+      country: country.trim().toUpperCase(),
     });
 
     if (res.status === 200) {
@@ -18,9 +26,20 @@ export const createScholarship = async (data, link) => {
       return true;
     }
   } catch (error) {
-    console.log(error);
+    if (error.response && error.response.status === 422) {
+      // Capture validation error message from backend
+      const errorMessage = error.response.data.errors.deadline
+        ? error.response.data.errors.deadline[0]
+        : 'An error occurred.';
+
+      toast.error(errorMessage);  // Show error message from backend
+    } else {
+      console.log(error);
+      toast.error(error.message || 'An error occurred.');
+    }
   }
 };
+
 export const getScholarship = async () => {
   try {
     const res = await apiClient.get("api/scholarship");
@@ -77,7 +96,23 @@ const extractFacebookIds = (url) => {
     return null;
   }
 };
-
+export const updateScholarship = async (id, updated) => {
+  try {
+    const res = await apiClient.put(`api/scholarship/${id}`, updated);
+    if (res.status === 200) {
+      const message = res.data.message;
+      toast.success(message);
+      return true;
+    }
+  } catch (error) {
+    if (error.response) {
+      toast.error(error.response.data.message || 'An error occurred.');
+    } else {
+      console.log(error);
+      toast.error('An unexpected error occurred.');
+    }
+  }
+};
 export const removeScholarship = async (id) => {
   try {
     const res = await apiClient.delete(`api/scholarship/${id}`);

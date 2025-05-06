@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types"; // Import PropTypes
 import Modal from "../../../../ui/shared/Modal";
 import Input from "../../../../ui/shared/Input";
 import Button from "../../../../ui/shared/Button";
@@ -6,13 +7,13 @@ import {
   createScholarship,
   scrabData,
 } from "../../../../context/scholarship/Scholarship";
-import { toast } from "react-toastify";
 
-export default function CreateScholarship({ onClose }) {
+const CreateScholarship = ({ onClose }) => {
   const initialState = {
     link: "",
     description: "",
     accessToken: "",
+    deadline: "",
   };
   const [inputData, setInputData] = useState(initialState);
   const [isSuccess, setSuccess] = useState(false);
@@ -28,10 +29,11 @@ export default function CreateScholarship({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { accessToken, link } = inputData;
+    const { accessToken, link, deadline } = inputData;
     const data = await scrabData(accessToken, link);
-    console.log(data)
+
     if (data !== null) {
+      data.deadline = deadline;
       setSuccess(true);
       setData(data);
     }
@@ -39,7 +41,16 @@ export default function CreateScholarship({ onClose }) {
 
   const handleSaveToDb = async (e) => {
     e.preventDefault();
-    const res = await createScholarship(data, inputData.link);
+  
+    if (!inputData.deadline) {
+      console.error('Deadline is required');
+      return;
+    }
+  
+    console.log('Formatted Deadline:', inputData.deadline);
+  
+    const res = await createScholarship(data, inputData.link, inputData.deadline);
+  
     if (res) {
       onClose();
     }
@@ -47,16 +58,10 @@ export default function CreateScholarship({ onClose }) {
 
   return (
     <Modal title="Create Scholarship" onClose={onClose}>
-      <form
-        onSubmit={handleSubmit}
-        className="p-4 md:p-5 space-y-2 md:space-y-5"
-      >
+      <form onSubmit={handleSubmit} className="p-4 md:p-5 space-y-2 md:space-y-5">
         <div className="flex flex-col gap-2 md:gap-5">
           <div className="flex flex-col md:flex-row gap-2 md:items-center">
-            <label
-              htmlFor="accessToken"
-              className="text-sm font-medium text-white"
-            >
+            <label htmlFor="accessToken" className="text-sm font-medium text-white">
               Access Token:
             </label>
             <Input
@@ -78,6 +83,17 @@ export default function CreateScholarship({ onClose }) {
               onChange={onChange}
               required
             />
+            <label htmlFor="deadline" className="text-sm font-medium text-white">
+              Deadline:
+            </label>
+            <Input
+              style="px-5 py-2 rounded-lg border-2"
+              type="date"
+              id="deadline"
+              value={inputData.deadline}
+              onChange={onChange}
+              required
+            />
           </div>
         </div>
 
@@ -94,7 +110,7 @@ export default function CreateScholarship({ onClose }) {
             <div>
               <Button
                 customClass="bg-white text-[#283d50]"
-                onClick={handleSaveToDb} // Pass the function reference here
+                onClick={handleSaveToDb}
               >
                 Save to dataBase
               </Button>
@@ -104,4 +120,11 @@ export default function CreateScholarship({ onClose }) {
       </form>
     </Modal>
   );
-}
+};
+
+// Add prop types validation
+CreateScholarship.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
+
+export default CreateScholarship;
