@@ -1,5 +1,5 @@
 {
-  "name": "welearn_front",
+  "name": "scholarlink",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,6 +19,7 @@
     "react-router-dom": "^7.0.1",
     "react-scripts": "^5.0.1",
     "react-toastify": "^10.0.6",
+    "socket.io-client": "^4.8.1",
     "vis-data": "^7.1.9",
     "vis-timeline": "^7.7.3",
     "web-vitals": "^2.1.4"

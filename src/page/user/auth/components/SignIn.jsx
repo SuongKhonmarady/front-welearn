@@ -1,34 +1,31 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../../../assets/Logo.png";
 import { signin } from "../../../../context/user/UserAction";
 import Input from "../../../../ui/shared/Input";
 import Button from "../../../../ui/shared/Button";
-import UseAuth from "../../../../hook/UseAuth";
+import PropTypes from 'prop-types';
 
 export default function SignIn({ setAuthOption }) {
-
-  const navigate = useNavigate();
-  const [inputData, setInputData] = useState({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const onChange = (e) => {
-    setInputData((prevState) => ({
+    setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = inputData;
-    const singInStatus = await signin(email, password);
-    if (singInStatus) {
+    const signInStatus = await signin(formData.email, formData.password);
+    if (signInStatus) {
       navigate("/");
     }
   };
-
 
   return (
     <>
@@ -78,8 +75,12 @@ export default function SignIn({ setAuthOption }) {
       </div>
 
       <div className="w-1/2 md:flex hidden justify-center items-center">
-        <img src={Logo} alt="Reading a Book" className="rounded-xl" />
+        <img src={Logo} alt="ScholarLink Logo" className="rounded-xl" />
       </div>
     </>
   );
 }
+
+SignIn.propTypes = {
+  setAuthOption: PropTypes.func.isRequired
+};

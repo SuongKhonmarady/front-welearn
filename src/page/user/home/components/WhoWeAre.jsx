@@ -8,9 +8,16 @@ export default function WhoWeAre() {
           <img src={team} alt="" className="w-full h-full" />
         </div>
         <div className="flex flex-col gap-5 md:w-1/2 p-5">
-          <h1 className="text-3xl font-semibold text-center">Who we are</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur vero dolorum cumque. Eveniet laborum ex eius expedita neque consectetur et magnam rem fugit, molestiae aliquam dolore ipsum soluta eaque amet?
+          <h1 className="text-3xl font-semibold text-center">Who We Are</h1>
+          <p className="text-white">
+            We are a dedicated platform focused on connecting Cambodian students with educational opportunities worldwide. 
+            Our mission is to make global scholarships accessible and manageable for every aspiring student. Through our 
+            advanced tracking system and AI-powered recommendations, we simplify the scholarship search and application process.
+          </p>
+          <p className="text-white">
+            Join thousands of students who have already discovered and secured scholarships through our platform. 
+            From undergraduate to postgraduate opportunities, from local to international scholarships, 
+            WeLearn is your comprehensive scholarship management companion.
           </p>
         </div>
       </div>

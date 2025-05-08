@@ -6,6 +6,7 @@ import Input from "../../../../ui/shared/Input";
 import Button from "../../../../ui/shared/Button";
 import SelectOption from "../../../../ui/shared/SelectOption";
 import { userIndentity } from "../../../../data/dummyData";
+import PropTypes from 'prop-types';
 
 export default function SignUp({ setAuthOption }) {
   const navigate = useNavigate();
@@ -16,16 +17,19 @@ export default function SignUp({ setAuthOption }) {
     username: "",
     confirmPassword: "",
   });
+
   const handleSelectChange = (event) => {
     const selectedOption = parseInt(event.target.value);
     setGraduate(selectedOption);
   };
+
   const onChange = (e) => {
     setInputData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const { username, email, currentPassword, confirmPassword } = inputData;
@@ -43,24 +47,21 @@ export default function SignUp({ setAuthOption }) {
 
   return (
     <>
-      <div className="w-1/2 md:flex hidden justify-center items-center">
-        <img src={Logo} alt="Reading a Book" className="rounded-xl" />
-      </div>
-      <div className="w-full md:w-1/2 p-5">
-        <h1 className="text-xl md:text-3xl font-semibold">Sign Up</h1>
-        <p className="mt-5 uppercase">Please provide us</p>
-        <form onSubmit={onSubmit} className="flex flex-col gap-4 py-5">
-          {/* Form Inputs */}
+      <div className="w-1/2 flex flex-col gap-5 p-5">
+        <h1 className="text-3xl font-bold">Join ScholarLink</h1>
+        <p className="text-sm text-gray-500">
+          Create your account to start tracking global scholarship opportunities
+        </p>
+        <form onSubmit={onSubmit} className="flex flex-col gap-5">
           <Input
             onChange={onChange}
             type="text"
             placeholder="Username"
             id="username"
-            style="p-2 border rounded-2xl"
+            style="p-2 border rounded-xl"
             autoComplete="off"
             required
           />
-
           <Input
             onChange={onChange}
             type="text"
@@ -82,20 +83,13 @@ export default function SignUp({ setAuthOption }) {
           <Input
             onChange={onChange}
             type="password"
-            placeholder="Confrim Password"
+            placeholder="Confirm Password"
             id="confirmPassword"
             style="p-2 border rounded-xl"
             autoComplete="off"
             required
           />
-          <div>
-            <label htmlFor="userIndetity">Identity : </label>
-            <SelectOption
-              options={userIndentity}
-              onSelectChange={handleSelectChange}
-            />
-          </div>
-
+          <SelectOption options={userIndentity} onSelectChange={handleSelectChange} />
           <Button type="submit" customClass="bg-[#283d50] text-white">
             Sign Up
           </Button>
@@ -107,7 +101,7 @@ export default function SignUp({ setAuthOption }) {
         </div>
 
         <div className="mt-6 text-black flex justify-between gap-2 items-center">
-          <p>Already have an account ?</p>
+          <p>Already have an account?</p>
           <Button
             customClass="bg-[#283d50] text-white"
             onClick={() => setAuthOption("Sign In")}
@@ -116,6 +110,14 @@ export default function SignUp({ setAuthOption }) {
           </Button>
         </div>
       </div>
+
+      <div className="w-1/2 md:flex hidden justify-center items-center">
+        <img src={Logo} alt="ScholarLink Logo" className="rounded-xl" />
+      </div>
     </>
   );
 }
+
+SignUp.propTypes = {
+  setAuthOption: PropTypes.func.isRequired
+};

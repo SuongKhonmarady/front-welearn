@@ -4,10 +4,7 @@ import account from "../../assets/svg/user.svg";
 import close from "../../assets/svg/close.svg";
 import menu from "../../assets/svg/menu.svg";
 import Button from "../shared/Button";
-import ranking from "../../assets/img/ranking.png";
-import ideas from "../../assets/img/ideas.png";
 import school from "../../assets/img/school.png";
-import technology from "../../assets/img/technology.png";
 import { useEffect, useRef, useState } from "react";
 
 export default function Navbar() {
@@ -32,12 +29,10 @@ export default function Navbar() {
   }, []);
 
   const Links = [
-    { name: "quiz", link: "/quiz", image: ideas },
-    { name: "ranking", link: "/ranking", image: ranking },
-    { name: "bakdoubAnswer", link: "/bakDoubAnswer", image: technology },
-    { name: "scholarship", link: "/scholarship", image: school },
+    { name: "explore scholarships", link: "/scholarship", image: school },
     { name: "account", link: "/account", image: account },
   ];
+  
   return (
     <nav className="bg-[#283d50] sticky top-0 z-30" ref={navRef}>
       <div className="max-w-7xl mx-auto flex justify-between p-4 xl:px-10">
@@ -58,6 +53,7 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+
           <div onClick={handleNav} className="block md:hidden">
             {nav ? (
               <Button>

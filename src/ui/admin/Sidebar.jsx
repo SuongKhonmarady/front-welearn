@@ -37,11 +37,10 @@ function SideBar() {
     <>
       <button
         onClick={handleToggle}
-        className="inline-flex items-center p-2 mt-2 ms-3 text-sm rounded-lg
-        sm:hidden"
+        className="inline-flex items-center p-2 mt-2 ms-3 text-sm rounded-lg sm:hidden"
       >
         <span className="sr-only">Toggle sidebar</span>
-        <img src={""} alt="sideBarIcon" className="w-5" />
+        <img src="" alt="sideBarIcon" className="w-5" />
       </button>
 
       <aside
@@ -61,31 +60,11 @@ function SideBar() {
           <ul className="space-y-2 font-medium">
             <li>
               <Link
-                to="/"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                {/* <img src={} alt="chartIcon" className="w-5 h-5" /> */}
-                <span className="ms-3">Subject</span>
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                to="/manageQuestion"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                {/* <img src={""} alt="bookIcon" className="w-5 h-5" /> */}
-                <span className="flex-1 ms-3 whitespace-nowrap">Question</span>
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="/manageScholarship"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                {/* <img src={""} alt="bookIcon" className="w-5 h-5" /> */}
                 <span className="flex-1 ms-3 whitespace-nowrap">
-                  Scholorship
+                  Scholarship
                 </span>
               </Link>
             </li>
@@ -94,13 +73,11 @@ function SideBar() {
                 onClick={handleLogout}
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                {/* <img src={""} alt="bookIcon" className="w-5 h-5" /> */}
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   LogOut
                 </span>
               </Link>
             </li>
-            
           </ul>
         </div>
       </aside>
