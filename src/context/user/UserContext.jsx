@@ -1,12 +1,13 @@
 import { createContext, useReducer } from "react";
 import { UserReducer } from "./UserReducer";
-
+import PropTypes from 'prop-types';
 
 const UserDataContext = createContext();
-export const UserDataProvider =({ children })=> {
+
+export const UserDataProvider = ({ children }) => {
   const initialState = {
     listUser: [],
-    currentUser : {},
+    currentUser: {},
     loading: false,
   };
   const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -16,6 +17,11 @@ export const UserDataProvider =({ children })=> {
       {children}
     </UserDataContext.Provider>
   );
-}
-export default UserDataContext
+};
+
+UserDataProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default UserDataContext;
 

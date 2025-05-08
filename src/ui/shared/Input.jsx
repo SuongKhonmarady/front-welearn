@@ -1,4 +1,6 @@
-export default function Input({
+import PropTypes from 'prop-types';
+
+function Input({
   style,
   type,
   id,
@@ -15,7 +17,6 @@ export default function Input({
 }) {
   return (
     <input
-      name={name}
       className={style}
       type={type}
       id={id}
@@ -23,11 +24,30 @@ export default function Input({
       placeholder={placeholder}
       autoComplete={autoComplete}
       onClick={onClick}
-      value={value}
       checked={checked}
       defaultValue={defaultValue}
       required={required}
       accept={accept}
+      name={name}
+      value={value}
     />
   );
 }
+
+Input.propTypes = {
+  style: PropTypes.string,
+  type: PropTypes.string,
+  id: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  autoComplete: PropTypes.string,
+  onClick: PropTypes.func,
+  checked: PropTypes.bool,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  required: PropTypes.bool,
+  accept: PropTypes.string,
+  name: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
+
+export default Input;

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function SelectOption({ options, onSelectChange }) {
   return (
     <select
@@ -12,3 +14,13 @@ export default function SelectOption({ options, onSelectChange }) {
     </select>
   );
 }
+
+SelectOption.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  onSelectChange: PropTypes.func.isRequired
+};

@@ -11,10 +11,10 @@ export default function RouteNotFound() {
             404
           </h1>
           <p className="tracking-tight font-extrabold dark:text-primary-500">
-            Something When Wrong
+            Something Went Wrong
           </p>
           <p className="text-lg font-light text-gray-500 dark:text-gray-400">
-            Sorry, we can't find that page. You'll find lots to explore on the
+            Sorry, we can&apos;t find that page. You&apos;ll find lots to explore on the
             home page.
           </p>
           <button

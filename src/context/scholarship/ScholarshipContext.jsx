@@ -1,9 +1,10 @@
 import { createContext, useReducer } from "react";
 import { ScholarshipReducer } from "./ScholarshipReducer";
-
+import PropTypes from 'prop-types';
 
 const ScholarshipDataContext = createContext();
-export const ScholarshipDataProvider =({ children })=> {
+
+export const ScholarshipDataProvider = ({ children }) => {
   const initialState = {
     listScholarship: [],
     loading: false,
@@ -15,6 +16,11 @@ export const ScholarshipDataProvider =({ children })=> {
       {children}
     </ScholarshipDataContext.Provider>
   );
-}
-export default ScholarshipDataContext
+};
+
+ScholarshipDataProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default ScholarshipDataContext;
 

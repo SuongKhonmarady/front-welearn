@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from 'prop-types';
 import Button from "./Button";
 import closeModal from "../../assets/svg/closeModal.svg";
 
@@ -20,9 +20,16 @@ export default function Modal({ children, onClose, title, content }) {
               <img src={closeModal} alt="iconClose" className="w-5" />
             </Button>
           </div>
-          {children}
+          <div className="p-4 md:p-5">{children}</div>
         </div>
       </div>
     </div>
   );
 }
+
+Modal.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.node
+};
