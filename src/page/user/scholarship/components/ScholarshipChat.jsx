@@ -39,7 +39,7 @@ I'll help find the perfect opportunities for you! 🎓`,
     setLoading(true);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/chat-scholarship', {
+      const response = await fetch('http://api-scholar.site/api/chat-scholarship', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: input }),
