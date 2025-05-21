@@ -16,9 +16,6 @@ export default function Hero() {
           <a href="/scholarship" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#283d50] hover:bg-[#1e2d3d] transition-colors duration-200">
             Explore Scholarships
           </a>
-          <a href="/authentication" className="inline-flex items-center justify-center px-6 py-3 border border-[#283d50] text-base font-medium rounded-lg text-[#283d50] hover:bg-gray-50 transition-colors duration-200">
-            Get Started
-          </a>
         </div>
       </div>
       <div className="hidden md:flex flex-col p-5 w-1/2">

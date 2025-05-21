@@ -51,6 +51,57 @@ export const getScholarship = async () => {
     console.log(error);
   }
 };
+// Get upcoming scholarships
+export const getUpcomingScholarships = async () => {
+  try {
+    const res = await apiClient.get("api/scholarship/upcoming");
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to fetch upcoming scholarships.");
+  }
+};
+
+// Get scholarships by degree
+export const getScholarshipsByDegree = async (degree) => {
+  try {
+    const res = await apiClient.get(`api/scholarship/degree/${degree}`);
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to fetch scholarships by degree.");
+  }
+};
+
+// Get scholarships by country
+export const getScholarshipsByCountry = async (country) => {
+  try {
+    const res = await apiClient.get(`api/scholarship/country/${country}`);
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to fetch scholarships by country.");
+  }
+};
+
+// Get scholarships by region
+export const getScholarshipsByRegion = async (region) => {
+  try {
+    const res = await apiClient.get(`api/scholarship/region/${region}`);
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to fetch scholarships by region.");
+  }
+};
 
 export const scrabData = async (accessToken, link) => {
   try {

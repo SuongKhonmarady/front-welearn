@@ -41,7 +41,7 @@ export default function ScholarshipTimeline({ scholarships }) {
             <div class="flex items-start gap-3">
               <div class="scholarship-icon">🎓</div>
               <div class="flex-1">
-                <div class="font-semibold text-gray-900 mb-1 line-clamp-2">${s.description}</div>
+                <div class="font-semibold text-gray-900 mb-1 line-clamp-2">${s.description.substring(0, 150)}${s.description.length > 150 ? '...' : ''}</div>
                 <div class="flex flex-wrap gap-2 mt-2">
                   ${s.country ? `
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -55,12 +55,11 @@ export default function ScholarshipTimeline({ scholarships }) {
               </div>
             </div>
           </div>
-        `,
-          start: s.post_at,
+        `,start: s.post_at,  // Fallback to current date if post_at is missing
           end: s.deadline,
           group: 1,
           className: colorClass,
-          title: `${s.description} - Deadline: ${moment(s.deadline).format("MMM Do, YYYY")}`,
+          title: `${s.title} - Deadline: ${moment(s.deadline).format("MMM Do, YYYY")}`,
         };
       })
     );
@@ -90,8 +89,8 @@ export default function ScholarshipTimeline({ scholarships }) {
       zoomable: true,
       horizontalScroll: true,
       verticalScroll: true,
-      maxHeight: 600,
-      minHeight: 500,
+      maxHeight: 450,
+      minHeight: 400,
       orientation: { axis: "top" },
       margin: { item: { horizontal: 10, vertical: 10 } },
       template: function (item) {
@@ -286,7 +285,18 @@ export default function ScholarshipTimeline({ scholarships }) {
         }
 
         .scholarship-card {
-          min-height: 80px;
+          min-height: 100px;
+          max-height: 160px;
+          overflow: hidden;
+          width: 100%;
+        }
+
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       `}</style>
     </div>

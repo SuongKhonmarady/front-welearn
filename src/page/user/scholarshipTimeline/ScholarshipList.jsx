@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
 import ScholarshipDataContext from "../../../context/scholarship/ScholarshipContext";
 import { getScholarship } from "../../../context/scholarship/Scholarship";
-import ScholarshipTimeline from "./components/Scholarshiptimeline";
+import ScholarshipTimeline from "./components/ScholarshipTimeline";
+import ScholarshipCardDisplay from "./components/ScholarshipCardDisplay";
 import Spinner from "../../../ui/shared/Spinner";
 import PropTypes from 'prop-types';
 import ScholarshipChat from './components/ScholarshipChat';
@@ -37,21 +38,32 @@ export default function ScholarshipList() {
           </div>
 
           {/* Scholarship Timeline Section */}
-          <section className="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:shadow-2xl">
+          <section id="timeline" className="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:shadow-2xl">
             <div className="mb-6">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-3xl">🎓</span>
                 <h2 className="text-3xl font-bold text-[#283d50]">Scholarships Timeline</h2>
               </div>
-              <p className="text-gray-600 ml-12">Track deadlines and plan your applications efficiently</p>
             </div>
             <div className="bg-[#f8fafc] rounded-xl p-4">
               <ScholarshipTimeline scholarships={listScholarship} />
             </div>
           </section>
+          
+          {/* Scholarship Cards Section */}
+          <section id="browse" className="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:shadow-2xl">
+            <div className="mb-6">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-3xl">🔍</span>
+                <h2 className="text-3xl font-bold text-[#283d50]">Browse Scholarships</h2>
+              </div>
+              <p className="text-gray-600 ml-12">Filter and find scholarships by degree, country, and more</p>
+            </div>
+            <ScholarshipCardDisplay />
+          </section>
 
           {/* Scholarship Recommender Section */}
-          <section className="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:shadow-2xl">
+          <section id="assistant" className="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:shadow-2xl">
             <div className="mb-6">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-3xl">🤖</span>
