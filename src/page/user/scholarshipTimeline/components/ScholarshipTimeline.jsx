@@ -20,14 +20,22 @@ export default function ScholarshipTimeline({ scholarships }) {
     }
 
     const container = timelineRef.current;
-    const groups = new DataSet([{ id: 1, content: "" }]);
-
-    // Filter out scholarships without deadlines
-    const validScholarships = scholarships.filter(s => s.deadline && s.deadline.trim() !== '');
+    const groups = new DataSet([{ id: 1, content: "" }]);    // Filter out scholarships without deadlines
+    const validScholarships = scholarships.filter(s => s && s.deadline && s.deadline.trim() !== '');
 
     const items = new DataSet(
       validScholarships.map((s) => {
-        const daysUntilDeadline = moment(s.deadline).diff(moment(), 'days');
+        // Ensure we have all required properties
+        const scholarship = {
+          id: s.id,
+          description: s.description || '',
+          deadline: s.deadline,
+          post_at: s.post_at || moment().format(),
+          title: s.title || 'Untitled Scholarship',
+          country: s.country || ''
+        };
+        
+        const daysUntilDeadline = moment(scholarship.deadline).diff(moment(), 'days');
         const colorClass = daysUntilDeadline < 7 
           ? 'urgent-scholarship'
           : daysUntilDeadline < 30
@@ -39,9 +47,8 @@ export default function ScholarshipTimeline({ scholarships }) {
           content: `
           <div class="p-3 scholarship-card ${colorClass}">
             <div class="flex items-start gap-3">
-              <div class="scholarship-icon">🎓</div>
-              <div class="flex-1">
-                <div class="font-semibold text-gray-900 mb-1 line-clamp-2">${s.description.substring(0, 150)}${s.description.length > 150 ? '...' : ''}</div>
+              <div class="scholarship-icon">🎓</div>                <div class="flex-1">
+                <div class="font-semibold text-gray-900 mb-1 line-clamp-2">${s.description ? s.description.substring(0, 150) + (s.description.length > 150 ? '...' : '') : 'No description available'}</div>
                 <div class="flex flex-wrap gap-2 mt-2">
                   ${s.country ? `
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
