@@ -5,6 +5,8 @@ import Homepage from "./page/user/home/Homepage";
 import UserAppLayout from "./ui/user/AppLayout";
 import AdminAppLayout from "./ui/admin/Applayout";
 import Scholarship from "./page/user/scholarshipTimeline/ScholarshipList";
+import BrowseScholarships from "./page/user/browseScholarships/BrowseScholarships";
+import ChatbotPage from "./page/user/chatbot/ChatbotPage";
 import Authentication from "./page/user/auth/Authentication";
 import Account from "./page/user/account/Account";
 import { UserDataProvider } from "./context/user/UserContext";
@@ -53,6 +55,8 @@ export default function App() {
             ) : (
               <Route element={<UserAppLayout />}>
                 <Route index element={<Homepage />} />
+                <Route path="/browse" element={<BrowseScholarships />} />
+                <Route path="/chatbot" element={<ChatbotPage />} />
                 <Route path="/scholarship" element={<Scholarship />} />
                 <Route path="/authentication" element={<Authentication />} />
                 <Route element={<PrivateRoutes />}>

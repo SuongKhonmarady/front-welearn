@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/logo_.png";
 import close from "../../assets/svg/close.svg";
 import menu from "../../assets/svg/menu.svg";
@@ -8,31 +8,11 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Navbar() {
   const [nav, setNav] = useState(true);
-  const location = useLocation();
-  const [activeSection, setActiveSection] = useState("timeline");
-
-  // Handle section navigation
-  const scrollToSection = (sectionId) => {
-    setActiveSection(sectionId);
-    const section = document.getElementById(sectionId);
-    if (section) {
-      // Add offset for the navbar height
-      const navbarHeight = 140; // Approximation of navbar + section nav height
-      const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-      window.scrollTo({
-        top: sectionTop,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   const handleNav = () => {
     setNav(!nav);
   };
   const navRef = useRef(null);
-
-  // Only show sub-navbar on scholarship page
-  const isScholarshipPage = location.pathname === "/scholarship";
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -47,44 +27,11 @@ export default function Navbar() {
     };
   }, []);
 
-  // Update active section based on scroll position
-  useEffect(() => {
-    if (!isScholarshipPage) return;
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 180; // Adding offset for navbar
-      
-      const timelineSection = document.getElementById('timeline');
-      const browseSection = document.getElementById('browse');
-      const assistantSection = document.getElementById('assistant');
-      
-      if (!timelineSection || !browseSection || !assistantSection) return;
-      
-      const timelineTop = timelineSection.offsetTop;
-      const browseTop = browseSection.offsetTop;
-      const assistantTop = assistantSection.offsetTop;
-      
-      if (scrollPosition >= assistantTop) {
-        setActiveSection('assistant');
-      } else if (scrollPosition >= browseTop) {
-        setActiveSection('browse');
-      } else if (scrollPosition >= timelineTop) {
-        setActiveSection('timeline');
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
-    // Initial check
-    handleScroll();
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isScholarshipPage]);
-
   const Links = [
-    { name: "explore scholarships", link: "/scholarship", image: school },
+    { name: "browse scholarships", link: "/browse", image: school },
+    { name: "scholarship timeline", link: "/scholarship", image: school },
+    { name: "AI Assistant", link: "/chatbot", image: school },
+    // { name: "Account", link: "/account", image: school },
   ];
   
   return (
@@ -94,7 +41,8 @@ export default function Navbar() {
           <Link to="/" className="flex-shrink-0">
             <img src={Logo} alt="Logo" className="w-[50px] md:w-[50px]" />
           </Link>
-          <div className="flex-grow flex justify-center">
+          
+          <div className="flex items-center space-x-4">
             <ul className="hidden md:inline-flex">
               {Links.map((link) => (
                 <li key={link.name} className="flex px-2 uppercase items-center">
@@ -108,9 +56,8 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-          </div>
 
-          <div className="flex-shrink-0">
+            <div className="flex-shrink-0">
             <div onClick={handleNav} className="block md:hidden">
               {nav ? (
                 <Button>
@@ -139,52 +86,10 @@ export default function Navbar() {
                 ))}
               </ul>
             </div>
-          </div>
-        </div>
-      </nav>
-      
-      {/* Scholarship Section Navigation - only show on /scholarship page */}
-      {isScholarshipPage && (
-        <div className="bg-white shadow-md sticky top-[72px] z-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-center space-x-4 md:space-x-8 overflow-x-auto scrollbar-hide">
-              <button
-                onClick={() => scrollToSection('timeline')}
-                className={`py-4 px-3 md:px-4 border-b-2 font-medium text-sm whitespace-nowrap ${
-                  activeSection === 'timeline'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-                aria-label="Go to Scholarships Timeline section"
-              >
-                <span className="hidden sm:inline">Scholarships</span> Timeline
-              </button>
-              <button
-                onClick={() => scrollToSection('browse')}
-                className={`py-4 px-3 md:px-4 border-b-2 font-medium text-sm whitespace-nowrap ${
-                  activeSection === 'browse'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-                aria-label="Go to Browse Scholarships section"
-              >
-                Browse <span className="hidden sm:inline">Scholarships</span>
-              </button>
-              <button
-                onClick={() => scrollToSection('assistant')}
-                className={`py-4 px-3 md:px-4 border-b-2 font-medium text-sm whitespace-nowrap ${
-                  activeSection === 'assistant'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-                aria-label="Go to AI Scholarship Assistant section"
-              >
-                AI <span className="hidden sm:inline">Scholarship Assistant</span>
-              </button>
             </div>
           </div>
         </div>
-      )}
+      </nav>
     </>
   );
 }

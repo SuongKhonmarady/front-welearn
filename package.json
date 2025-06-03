@@ -2,7 +2,7 @@
   "name": "scholarlink",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://suongkhonmarady.github.io/sharescholar",
+  "homepage": "https://suongkhonmarady.github.io/",
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",

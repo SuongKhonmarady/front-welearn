@@ -1,4 +1,4 @@
-import dog from "../../../../assets/img/Hero.png";
+import dog from "../../../../assets/img/scholarship.png";
 
 export default function Hero() {
   return (
@@ -8,7 +8,7 @@ export default function Hero() {
           Your Gateway to Global <br /> Educational Opportunities
         </h1>
         <p className="text-gray-600 text-lg">
-          Welcome to WeLearn - your dedicated platform for discovering and tracking global scholarship opportunities. 
+          Welcome to OpenScholarships - your dedicated platform for discovering and tracking global scholarship opportunities. 
           Our AI-powered system helps you find, track, and apply for scholarships worldwide. Never miss a deadline 
           and find the perfect funding opportunity for your educational journey.
         </p>
@@ -19,7 +19,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="hidden md:flex flex-col p-5 w-1/2">
-        <img src={dog} alt="heroImage" className="w-[500px] mx-auto" />
+        <img src={dog} alt="scholarship" className="w-[700px] mx-auto" />
       </div>
     </div>
   );
