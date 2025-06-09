@@ -42,24 +42,56 @@ export const createScholarship = async (data, link, deadline, country) => {
 
 export const getScholarship = async () => {
   try {
+    console.log("Making API call to: api/scholarship");
     const res = await apiClient.get("api/scholarship");
+    console.log("getScholarship API Response status:", res.status);
+    console.log("getScholarship API Response data:", res.data);
     if (res.status === 200) {
       const data = res.data.data;
       return data;
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error in getScholarship:", error);
+    if (error.response) {
+      console.log("Error response:", error.response.data);
+      console.log("Error status:", error.response.status);
+    }
   }
 };
-// Get upcoming scholarships
-export const getUpcomingScholarships = async () => {
+
+// Get scholarship by ID
+export const getScholarshipById = async (id) => {
   try {
-    const res = await apiClient.get("api/scholarship/upcoming");
+    const res = await apiClient.get(`api/scholarship/${id}`);
     if (res.status === 200) {
       return res.data.data;
     }
   } catch (error) {
     console.log(error);
+    if (error.response && error.response.status === 404) {
+      toast.error("Scholarship not found.");
+    } else {
+      toast.error("Failed to fetch scholarship details.");
+    }
+    throw error;
+  }
+};
+// Get upcoming scholarships
+export const getUpcomingScholarships = async () => {
+  try {
+    console.log("Making API call to: api/scholarship/upcoming");
+    const res = await apiClient.get("api/scholarship/upcoming");
+    console.log("API Response status:", res.status);
+    console.log("API Response data:", res.data);
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.log("Error in getUpcomingScholarships:", error);
+    if (error.response) {
+      console.log("Error response:", error.response.data);
+      console.log("Error status:", error.response.status);
+    }
     toast.error("Failed to fetch upcoming scholarships.");
   }
 };

@@ -3,68 +3,56 @@ import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import Homepage from "./page/user/home/Homepage";
 import UserAppLayout from "./ui/user/AppLayout";
-import AdminAppLayout from "./ui/admin/Applayout";
 import Scholarship from "./page/user/scholarshipTimeline/ScholarshipList";
 import BrowseScholarships from "./page/user/browseScholarships/BrowseScholarships";
 import ChatbotPage from "./page/user/chatbot/ChatbotPage";
 import Authentication from "./page/user/auth/Authentication";
+import AdminLogin from "./page/admin/auth/AdminLogin";
 import Account from "./page/user/account/Account";
 import { UserDataProvider } from "./context/user/UserContext";
 import { ScholarshipDataProvider } from "./context/scholarship/ScholarshipContext";
 import PrivateRoutes from "./ui/shared/PrivateRoute";
-import { useEffect, useState } from "react";
-import { getUser } from "./context/user/UserAction";
-import Spinner from "./ui/shared/Spinner";
+import AdminPrivateRoute from "./ui/shared/AdminPrivateRoute";
 import RouteNotFound from "./ui/shared/RouteNotFound";
 import { ToastContainer } from "react-toastify";
 import ScholarshipList from "./page/admin/manageScholarship/ScholarshipList";
+import AdminDashboard from "./page/admin/dashboard/AdminDashboard";
+import AuthDebug from "./debug/AuthDebug";
+import ScholarshipDetailPage from "./page/user/scholarshipDetail/ScholarshipDetailPage";
 
 export default function App() {
-  const [isAdmin, setAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getUser();
-      if (res) {
-        setAdmin(res.isAdmin);
-        setIsLoading(false);
-      } else {
-        setAdmin(false);
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (isLoading) {
-    return <Spinner isFull={true} />;
-  }
-
   return (
     <Router>
       <UserDataProvider>
         <ScholarshipDataProvider>
           <Routes>
-            {isAdmin ? (
-              <Route element={<AdminAppLayout />}>
-                <Route path="/" element={<ScholarshipList />} />
-                <Route path="/manageScholarship" element={<ScholarshipList />} />
-                <Route path="/*" element={<RouteNotFound />} />
+            {/* Debug route - remove in production */}
+            <Route path="/debug-auth" element={<AuthDebug />} />
+            
+            {/* Admin login route - accessible to all */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            
+            {/* Protected Admin Routes */}
+            <Route element={<AdminPrivateRoute />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/manageScholarship" element={<ScholarshipList />} />
+            </Route>
+            
+            {/* User Routes */}
+            <Route element={<UserAppLayout />}>
+              <Route index element={<Homepage />} />
+              <Route path="/browse" element={<BrowseScholarships />} />
+              <Route path="/scholarship/:id" element={<ScholarshipDetailPage />} />
+              <Route path="/chatbot" element={<ChatbotPage />} />
+              <Route path="/scholarship" element={<Scholarship />} />
+              <Route path="/authentication" element={<Authentication />} />
+              <Route element={<PrivateRoutes />}>
+                <Route path="/account" element={<Account />} />
               </Route>
-            ) : (
-              <Route element={<UserAppLayout />}>
-                <Route index element={<Homepage />} />
-                <Route path="/browse" element={<BrowseScholarships />} />
-                <Route path="/chatbot" element={<ChatbotPage />} />
-                <Route path="/scholarship" element={<Scholarship />} />
-                <Route path="/authentication" element={<Authentication />} />
-                <Route element={<PrivateRoutes />}>
-                  <Route path="/account" element={<Account />} />
-                </Route>
-                <Route path="/*" element={<RouteNotFound />} />
-              </Route>
-            )}
+            </Route>
+            
+            {/* Catch all route */}
+            <Route path="/*" element={<RouteNotFound />} />
           </Routes>
         </ScholarshipDataProvider>
       </UserDataProvider>

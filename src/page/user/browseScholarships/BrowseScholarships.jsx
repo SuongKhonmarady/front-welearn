@@ -181,92 +181,149 @@ export default function BrowseScholarships() {
     setDisplayedResults(filteredResults.slice(0, ITEMS_PER_PAGE));
     setCurrentPage(1);
   }, [filteredResults]);
-
   return (
-    <div className="space-y-6">
-      <div className="bg-white p-6 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold text-[#283d50] mb-4">Find Your Scholarship</h2>
-        
-        {/* Results count indicator */}
-        {!loading && filteredResults.length > 0 && (
-          <div className="mb-4 text-sm text-gray-600">
-            Showing {displayedResults.length} of {filteredResults.length} scholarships
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#283d50] to-blue-600 rounded-full mb-6">
+            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
           </div>
-        )}
-          <FilterSection
-          filterType={filterType}
-          setFilterType={setFilterType}
-          inputValue={inputValue}
-          handleInputChange={handleInputChange}
-          searchStatus={searchStatus}
-          regionFilter={regionFilter}
-          setRegionFilter={setRegionFilter}
-          sortBy={sortBy}
-          setSortBy={setSortBy}
-          handleFilter={handleFilter}
-        />
+          <h1 className="text-4xl md:text-5xl font-bold text-[#283d50] mb-4">
+            Discover Your Perfect
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Scholarship</span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Explore thousands of scholarship opportunities from universities worldwide. 
+            Your journey to global education starts here.
+          </p>
+        </div>
 
-        {/* Results Display */}
-        <div className="mt-4">
-          {loading ? (
-            <div className="flex justify-center py-8">
-              <div className="animate-pulse flex space-x-4">
-                <div className="flex-1 space-y-6 py-1">
-                  <div className="h-2 bg-slate-200 rounded"></div>
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="h-2 bg-slate-200 rounded col-span-2"></div>
-                      <div className="h-2 bg-slate-200 rounded col-span-1"></div>
-                    </div>
-                    <div className="h-2 bg-slate-200 rounded"></div>
-                  </div>
+        {/* Filter Section */}
+        <div className="mb-8">
+          <FilterSection
+            filterType={filterType}
+            setFilterType={setFilterType}
+            inputValue={inputValue}
+            handleInputChange={handleInputChange}
+            searchStatus={searchStatus}
+            regionFilter={regionFilter}
+            setRegionFilter={setRegionFilter}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            handleFilter={handleFilter}
+          />
+        </div>
+
+        {/* Results Section */}
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          {/* Results Header */}
+          {!loading && filteredResults.length > 0 && (
+            <div className="bg-gradient-to-r from-[#283d50] to-blue-600 px-6 py-4">
+              <div className="flex items-center justify-between text-white">
+                <div className="flex items-center space-x-3">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                  <span className="font-semibold">Search Results</span>
                 </div>
+                <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
+                  {displayedResults.length} of {filteredResults.length} scholarships
+                </span>
               </div>
-            </div>          ) : displayedResults.length > 0 ? (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {displayedResults.map((scholarship) => (
-                  <ScholarshipCard key={scholarship.id} scholarship={scholarship} />
-                ))}
-              </div>
-              
-              {/* Show More Button */}
-              {displayedResults.length < filteredResults.length && (
-                <div className="flex justify-center mt-8">
-                  <button
-                    onClick={handleShowMore}
-                    disabled={loadingMore}
-                    className="px-6 py-3 bg-[#283d50] text-white rounded-lg hover:bg-[#1e2d3d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                  >
-                    {loadingMore ? (
-                      <>
-                        <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Loading...
-                      </>
-                    ) : (
-                      <>
-                        Show More
-                        <span className="text-sm">
-                          ({displayedResults.length} of {filteredResults.length})
-                        </span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="text-center py-8 bg-gray-50 rounded-lg">
-              <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 className="mt-2 text-lg font-medium text-gray-900">No scholarships found</h3>
-              <p className="mt-1 text-gray-500">Try changing your search criteria or check back later for new opportunities.</p>
             </div>
           )}
+
+          {/* Results Content */}
+          <div className="p-6">
+            {loading ? (
+              <div className="flex flex-col items-center justify-center py-16">
+                <div className="relative">
+                  <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                </div>                <p className="mt-4 text-gray-600 font-medium">Finding the best scholarships for you...</p>
+                <p className="text-sm text-gray-500">This won&apos;t take long</p>
+              </div>
+            ) : displayedResults.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                  {displayedResults.map((scholarship) => (
+                    <ScholarshipCard key={scholarship.id} scholarship={scholarship} />
+                  ))}
+                </div>
+                
+                {/* Show More Button */}
+                {displayedResults.length < filteredResults.length && (
+                  <div className="flex justify-center mt-12">
+                    <button
+                      onClick={handleShowMore}
+                      disabled={loadingMore}
+                      className="group relative px-8 py-4 bg-gradient-to-r from-[#283d50] to-blue-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-3"
+                    >
+                      {loadingMore ? (
+                        <>
+                          <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Loading More...
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-5 h-5 group-hover:rotate-180 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                          </svg>
+                          Load More Scholarships
+                          <span className="bg-white bg-opacity-20 px-2 py-1 rounded-full text-xs">
+                            {filteredResults.length - displayedResults.length} remaining
+                          </span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="text-center py-16">
+                <div className="relative mx-auto w-32 h-32 mb-8">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full"></div>
+                  <div className="absolute inset-4 bg-white rounded-full flex items-center justify-center">
+                    <svg className="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                </div>                <h3 className="text-2xl font-bold text-gray-900 mb-4">No Scholarships Found</h3>
+                <p className="text-gray-600 mb-8 max-w-md mx-auto">
+                  We couldn&apos;t find any scholarships matching your criteria. 
+                  Try adjusting your filters or check back later for new opportunities.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button 
+                    onClick={() => {
+                      setFilterType("upcoming");
+                      setInputValue("");
+                      setRegionFilter("");
+                    }}
+                    className="px-6 py-3 bg-[#283d50] text-white rounded-lg hover:bg-[#1e2d3d] transition-colors font-medium"
+                  >
+                    Reset Filters
+                  </button>
+                  <button 
+                    onClick={fetchInitialScholarships}
+                    className="px-6 py-3 border border-[#283d50] text-[#283d50] rounded-lg hover:bg-[#283d50] hover:text-white transition-colors font-medium"
+                  >
+                    Refresh Results
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

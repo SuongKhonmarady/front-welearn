@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DataSet, Timeline } from "vis-timeline/standalone";
 import moment from "moment";
 import "vis-timeline/styles/vis-timeline-graph2d.min.css";
 import PropTypes from "prop-types";
-import ScholarshipDetailModal from "./ScholarshipDetailModal";
 
 export default function ScholarshipTimeline({ scholarships }) {
+  const navigate = useNavigate();
   const timelineRef = useRef(null);
   const timelineInstance = useRef(null);
-  const [selectedScholarship, setSelectedScholarship] = useState(null);
-  const [isModalOpen, setModalOpen] = useState(false);
   const [view, setView] = useState('sixMonths'); // 'threeMonths', 'sixMonths', 'year'
 
   useEffect(() => {
@@ -40,29 +39,22 @@ export default function ScholarshipTimeline({ scholarships }) {
           ? 'urgent-scholarship'
           : daysUntilDeadline < 30
             ? 'soon-scholarship'
-            : 'regular-scholarship';
-
-        return {
+            : 'regular-scholarship';        return {
           id: s.id,
           content: `
-          <div class="p-3 scholarship-card ${colorClass}">
-            <div class="flex items-start gap-3">
-              <div class="scholarship-icon">🎓</div>                <div class="flex-1">
-                <div class="font-semibold text-gray-900 mb-1 line-clamp-2">${s.description ? s.description.substring(0, 150) + (s.description.length > 150 ? '...' : '') : 'No description available'}</div>
-                <div class="flex flex-wrap gap-2 mt-2">
-                  ${s.country ? `
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                      ${s.country}
-                    </span>
-                  ` : ''}
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium deadline-badge">
-                    Deadline: ${moment(s.deadline).format("MMM Do, YYYY")}
-                  </span>
+            <div class="scholarship-card ${colorClass}">
+              <div class="card-body">
+                <h3 class="card-title">${s.title ? s.title.substring(0, 80) + (s.title.length > 80 ? '...' : '') : 'Untitled Scholarship'}</h3>
+                <div class="card-info">
+                  ${s.country ? `<span class="location">📍 ${s.country}</span>` : ''}
+                  <span class="deadline">📅 ${moment(s.deadline).format("MMM Do")}</span>
+                </div>
+                <div class="days-remaining ${colorClass}">
+                  ${daysUntilDeadline >= 0 ? `${daysUntilDeadline} days left` : 'Expired'}
                 </div>
               </div>
             </div>
-          </div>
-        `,start: s.post_at,  // Fallback to current date if post_at is missing
+          `,start: s.post_at,  // Fallback to current date if post_at is missing
           end: s.deadline,
           group: 1,
           className: colorClass,
@@ -106,88 +98,120 @@ export default function ScholarshipTimeline({ scholarships }) {
     };
 
     const timeline = new Timeline(container, items, groups, options);
-    timelineInstance.current = timeline;
-
-    timeline.on("select", function (properties) {
+    timelineInstance.current = timeline;    timeline.on("select", function (properties) {
       const selectedId = properties.items[0];
       if (!selectedId) return;
 
       const selected = scholarships.find((s) => s.id === selectedId);
       if (selected) {
-        setSelectedScholarship(selected);
-        setModalOpen(true);
+        // Navigate to the scholarship detail page
+        navigate(`/scholarship/${selected.id}`);
       }
     });
-  }, [scholarships, view]);
+  }, [scholarships, view, navigate]);
 
   const handleViewChange = (newView) => {
     setView(newView);
   };
-
   return (
-    <div className="space-y-4">
-      {/* Timeline Controls */}
-      <div className="flex items-center justify-between p-4 bg-[#f8fafc] border border-gray-200 rounded-lg shadow-sm">
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-[#283d50]">View Range:</span>
-          <div className="flex rounded-lg shadow-sm">
-            <button
-              onClick={() => handleViewChange('threeMonths')}
-              className={`px-4 py-2 text-sm font-medium ${
-                view === 'threeMonths'
-                  ? 'bg-[#283d50] text-white border-[#283d50]'
-                  : 'bg-white text-[#283d50] border-gray-200 hover:bg-gray-50'
-              } border first:rounded-l-lg last:rounded-r-lg transition-colors`}
-            >
-              3 Months
-            </button>
-            <button
-              onClick={() => handleViewChange('sixMonths')}
-              className={`px-4 py-2 text-sm font-medium ${
-                view === 'sixMonths'
-                  ? 'bg-[#283d50] text-white border-[#283d50]'
-                  : 'bg-white text-[#283d50] border-gray-200 hover:bg-gray-50'
-              } border -ml-px transition-colors`}
-            >
-              6 Months
-            </button>
-            <button
-              onClick={() => handleViewChange('year')}
-              className={`px-4 py-2 text-sm font-medium ${
-                view === 'year'
-                  ? 'bg-[#283d50] text-white border-[#283d50]'
-                  : 'bg-white text-[#283d50] border-gray-200 hover:bg-gray-50'
-              } border -ml-px transition-colors`}
-            >
-              Full Year
-            </button>
-          </div>
-        </div>
-        <div className="text-sm text-[#283d50]">
-          Click on a scholarship to view details
-        </div>
-      </div>
-
-      {/* Timeline Container */}
-      <div className="bg-[#f8fafc] border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-        {scholarships.some(s => s.deadline && s.deadline.trim() !== '') ? (
-          <div ref={timelineRef} className="timeline-container"></div>
-        ) : (
-          <div className="p-8 text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#e5e9f0] mb-4">
-              <span className="text-2xl">📅</span>
+    <div className="space-y-6">
+      {/* Enhanced Timeline Controls */}
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
             </div>
-            <h3 className="text-lg font-medium text-[#283d50] mb-1">No Scholarships Available</h3>
-            <p className="text-gray-500">There are currently no scholarships with deadlines to display.</p>
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">Timeline View</h2>
+              <p className="text-sm text-gray-500">Visualize scholarship deadlines chronologically</p>
+            </div>
           </div>
-        )}
+          
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-gray-600">Range:</span>
+            <div className="flex bg-gray-100 rounded-lg p-1">
+              <button
+                onClick={() => handleViewChange('threeMonths')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
+                  view === 'threeMonths'
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                3M
+              </button>
+              <button
+                onClick={() => handleViewChange('sixMonths')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
+                  view === 'sixMonths'
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                6M
+              </button>
+              <button
+                onClick={() => handleViewChange('year')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
+                  view === 'year'
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                1Y
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Legend */}
+        <div className="flex flex-wrap items-center gap-4 mt-4 pt-4 border-t border-gray-100">
+          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Status:</span>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-400 to-blue-500"></div>
+            <span className="text-sm text-gray-600">Open</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500"></div>
+            <span className="text-sm text-gray-600">Soon (≤30 days)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-red-400 to-red-500"></div>
+            <span className="text-sm text-gray-600">Urgent (≤7 days)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-gray-400 to-gray-500"></div>
+            <span className="text-sm text-gray-600">Expired</span>
+          </div>
+        </div>
+      </div>      {/* Enhanced Timeline Container */}
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+        {scholarships.some(s => s.deadline && s.deadline.trim() !== '') ? (
+          <div className="timeline-wrapper">
+            <div ref={timelineRef} className="timeline-container"></div>
+            <div className="timeline-footer">
+              <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Click any scholarship card to view detailed information</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="p-12 text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-50 to-indigo-100 mb-6">
+              <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No Scholarships in Timeline</h3>
+            <p className="text-gray-500 max-w-md mx-auto">There are currently no scholarships with deadlines to display in the timeline view. Check back later for new opportunities!</p>
+          </div>        )}
       </div>
-
-      <ScholarshipDetailModal
-        isOpen={isModalOpen}
-        onClose={() => setModalOpen(false)}
-        data={selectedScholarship}
-      />
 
       <style>{`
         .timeline-container {

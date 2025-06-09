@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../../../assets/Logo.png";
-import { signin } from "../../../../context/user/UserAction";
+import { tokenSignin } from "../../../../context/user/UserAction";
 import Input from "../../../../ui/shared/Input";
 import Button from "../../../../ui/shared/Button";
 import PropTypes from 'prop-types';
@@ -11,7 +11,9 @@ export default function SignIn({ setAuthOption }) {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -21,9 +23,17 @@ export default function SignIn({ setAuthOption }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const signInStatus = await signin(formData.email, formData.password);
-    if (signInStatus) {
-      navigate("/");
+    setIsLoading(true);
+    
+    try {
+      const result = await tokenSignin(formData.email, formData.password);
+      if (result.success) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -52,8 +62,12 @@ export default function SignIn({ setAuthOption }) {
             autoComplete="off"
             required
           />
-          <Button type="submit" customClass="bg-[#283d50] text-white">
-            Sign In
+          <Button 
+            type="submit" 
+            customClass="bg-[#283d50] text-white disabled:opacity-50" 
+            disabled={isLoading}
+          >
+            {isLoading ? "Signing In..." : "Sign In"}
           </Button>
         </form>
         <div className="mt-5 grid grid-cols-3 items-center text-gray-400">

@@ -26,6 +26,7 @@
     "react-router-dom": "^7.0.1",
     "react-scripts": "^5.0.1",
     "react-toastify": "^10.0.6",
+    "recharts": "^2.15.3",
     "socket.io-client": "^4.8.1",
     "vis-data": "^7.1.9",
     "vis-timeline": "^7.7.3",

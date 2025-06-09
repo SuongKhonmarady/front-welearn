@@ -19,25 +19,41 @@ export default function ApplyButton({ deadline, officialLink, fallbackLink, clas
     return 'Apply Now';
   };
 
+  const getButtonIcon = () => {
+    if (isExpired) {
+      return (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+        </svg>
+      );
+    }
+    return (
+      <svg className="w-5 h-5 group-hover:rotate-12 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+      </svg>
+    );
+  };
+
   return (
     <div className="flex flex-col">
       <a
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex justify-center items-center px-4 py-2 rounded-md ${
+        className={`group flex justify-center items-center px-6 py-3 rounded-xl font-semibold transition-all duration-200 w-full text-center space-x-2 ${
           isExpired 
-            ? 'bg-gray-200 text-gray-500 cursor-not-allowed' 
+            ? 'bg-gray-200 text-gray-500 cursor-not-allowed shadow-sm' 
             : useOfficialLink
-              ? 'bg-[#283d50] text-white hover:bg-[#1e2d3d]'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
-        } transition-colors w-full text-center ${className || ''}`}
+              ? 'bg-gradient-to-r from-[#283d50] to-blue-600 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
+              : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
+        } ${className || ''}`}
         onClick={(e) => isExpired && e.preventDefault()}
       >
-        {getButtonText()}
+        {getButtonIcon()}
+        <span>{getButtonText()}</span>
         {!isExpired && (
-          <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         )}
       </a>
