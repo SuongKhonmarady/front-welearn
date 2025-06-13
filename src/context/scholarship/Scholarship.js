@@ -135,6 +135,19 @@ export const getScholarshipsByRegion = async (region) => {
   }
 };
 
+// Get scholarships by title
+export const getScholarshipsByTitle = async (title) => {
+  try {
+    const res = await apiClient.get(`api/scholarship/search-by-title?title=${encodeURIComponent(title)}`);
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to fetch scholarships by title.");
+  }
+};
+
 export const scrabData = async (accessToken, link) => {
   try {
     const pageAndPostId = extractFacebookIds(link);

@@ -43,8 +43,7 @@ export default function FilterSection({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
               </svg>
               Filter Type
-            </label>
-            <select
+            </label>            <select
               value={filterType}
               onChange={(e) => {
                 setFilterType(e.target.value);
@@ -55,13 +54,46 @@ export default function FilterSection({
               className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
             >
               <option value="upcoming">🕒 Upcoming Deadlines</option>
+              <option value="title">🔍 Search by Title</option>
               <option value="country">🌍 By Country</option>
               <option value="degree">🎓 By Degree Level</option>
               <option value="region">📍 By Region</option>
             </select>
-          </div>
+          </div>          {/* Dynamic Filter Input */}
+          {filterType === "title" && (
+            <div className="space-y-2">
+              <label className="flex items-center text-sm font-semibold text-gray-700">
+                <svg className="w-4 h-4 mr-2 text-[#283d50]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Scholarship Title
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  placeholder="e.g., Merit-based Scholarship, University Grant"
+                  className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
+                />
+                {searchStatus && (
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
+                    {searchStatus === "Searching..." ? (
+                      <div className="flex items-center space-x-2">
+                        <svg className="animate-spin h-4 w-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                      </div>
+                    ) : (
+                      <span className="text-xs text-green-500 bg-green-50 px-2 py-1 rounded-full">✓</span>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
-          {/* Dynamic Filter Input */}
           {filterType === "country" && (
             <div className="space-y-2">
               <label className="flex items-center text-sm font-semibold text-gray-700">
@@ -192,16 +224,18 @@ export default function FilterSection({
           </div>
         </div>
 
-        {/* Quick Filter Tags */}
-        <div className="mt-6 pt-6 border-t border-gray-100">
+        {/* Quick Filter Tags */}        <div className="mt-6 pt-6 border-t border-gray-100">
           <p className="text-sm font-semibold text-gray-700 mb-3">Quick Filters:</p>
           <div className="flex flex-wrap gap-2">
-            {["USA", "Canada", "UK", "Germany", "Australia", "Master", "PhD", "Bachelor"].map((tag) => (
+            {["USA", "Canada", "UK", "Germany", "Australia", "Master", "PhD", "Bachelor", "Merit", "Need-based", "Research"].map((tag) => (
               <button
                 key={tag}
                 onClick={() => {
                   if (["Master", "PhD", "Bachelor"].includes(tag)) {
                     setFilterType("degree");
+                    handleInputChange({ target: { value: tag } });
+                  } else if (["Merit", "Need-based", "Research"].includes(tag)) {
+                    setFilterType("title");
                     handleInputChange({ target: { value: tag } });
                   } else {
                     setFilterType("country");

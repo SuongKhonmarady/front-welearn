@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import dog from "../../../../assets/img/scholarship.png";
 
 export default function Hero() {
@@ -9,13 +10,13 @@ export default function Hero() {
         </h1>
         <p className="text-gray-600 text-lg">
           Welcome to OpenScholarships - your dedicated platform for discovering and tracking global scholarship opportunities. 
-          Our AI-powered system helps you find, track, and apply for scholarships worldwide. Never miss a deadline 
+           Never miss a deadline 
           and find the perfect funding opportunity for your educational journey.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 mt-4">
-          <a href="/scholarship" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#283d50] hover:bg-[#1e2d3d] transition-colors duration-200">
+          <Link to="/browse" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#283d50] hover:bg-[#1e2d3d] transition-colors duration-200">
             Explore Scholarships
-          </a>
+          </Link>
         </div>
       </div>
       <div className="hidden md:flex flex-col p-5 w-1/2">

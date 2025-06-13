@@ -3,7 +3,8 @@ import {
   getUpcomingScholarships,
   getScholarshipsByCountry,
   getScholarshipsByDegree,
-  getScholarshipsByRegion
+  getScholarshipsByRegion,
+  getScholarshipsByTitle
 } from "../../../context/scholarship/Scholarship";
 import useDebounce from '../../../hook/useDebounce';
 import ScholarshipCard from './components/ScholarshipCard';
@@ -42,10 +43,11 @@ export default function BrowseScholarships() {
     setLoading(true);
     let results = [];
 
-    try {
-      // First apply the main filter type
+    try {      // First apply the main filter type
       if (filterType === "upcoming") {
         results = await getUpcomingScholarships();
+      } else if (filterType === "title" && filterValue) {
+        results = await getScholarshipsByTitle(filterValue);
       } else if (filterType === "country" && filterValue) {
         try {
           // Standardize country case to uppercase before sending to API
@@ -110,11 +112,10 @@ export default function BrowseScholarships() {
     setInputValue(e.target.value);
     setSearchStatus("Typing...");
   };
-  
-  // Define handler functions
+    // Define handler functions
   const handleFilter = () => {
     // For non-text inputs like dropdowns and manual filter button
-    if (filterType !== "country" && filterType !== "degree") {
+    if (filterType !== "country" && filterType !== "degree" && filterType !== "title") {
       applyFilters();
     }
   };
@@ -156,21 +157,19 @@ export default function BrowseScholarships() {
   useEffect(() => {
     fetchInitialScholarships();
   }, []);
-  
-  // Listen for changes in the debounced filter value
+    // Listen for changes in the debounced filter value
   useEffect(() => {
-    if ((filterType === "country" || filterType === "degree") && debouncedFilterValue !== "") {
+    if ((filterType === "country" || filterType === "degree" || filterType === "title") && debouncedFilterValue !== "") {
       setSearchStatus("Searching...");
       setFilterValue(debouncedFilterValue);
-    } else if ((filterType === "country" || filterType === "degree") && debouncedFilterValue === "") {
+    } else if ((filterType === "country" || filterType === "degree" || filterType === "title") && debouncedFilterValue === "") {
       setFilterValue("");
       setSearchStatus("");
     }
-  }, [debouncedFilterValue, filterType]);
-    useEffect(() => {
+  }, [debouncedFilterValue, filterType]);    useEffect(() => {
     if (scholarships.length > 0) {
       applyFilters();
-      if (filterType === "country" || filterType === "degree") {
+      if (filterType === "country" || filterType === "degree" || filterType === "title") {
         setSearchStatus("");
       }
     }
