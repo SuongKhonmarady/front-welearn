@@ -1,0 +1,35 @@
+{
+  "short_name": "OpenScholarships",
+  "name": "OpenScholarships - Global Education Funding Platform",
+  "description": "Discover thousands of scholarship opportunities worldwide. Track deadlines, manage applications, and connect with universities globally.",
+  "icons": [
+    {
+      "src": "logo_.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#283d50",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["education", "productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "logo_.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide"
+    }
+  ]
+}

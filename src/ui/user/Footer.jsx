@@ -14,10 +14,7 @@ export default function Footer() {
             <Link to="/" className="inline-block">
               <img src={Logo} alt="WeLearn Logo" className="w-[80px] md:w-[100px]" />
             </Link>
-            <p className="text-gray-300 mt-4 text-sm">
-              OpenScholarships helps students find and apply for scholarships around the world.
-              Our platform makes education opportunities more accessible for everyone.
-            </p>
+            
             <div className="flex space-x-4 pt-2">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-300 hover:text-white transition-colors">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

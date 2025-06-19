@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import Homepage from "./page/user/home/Homepage";
@@ -22,9 +23,10 @@ import ScholarshipDetailPage from "./page/user/scholarshipDetail/ScholarshipDeta
 
 export default function App() {
   return (
-    <Router>
-      <UserDataProvider>
-        <ScholarshipDataProvider>
+    <HelmetProvider>
+      <Router>
+        <UserDataProvider>
+          <ScholarshipDataProvider>
           <Routes>
             {/* Debug route - remove in production */}
             <Route path="/debug-auth" element={<AuthDebug />} />
@@ -44,7 +46,7 @@ export default function App() {
               <Route path="/browse" element={<BrowseScholarships />} />
               <Route path="/scholarship/:id" element={<ScholarshipDetailPage />} />
               <Route path="/chatbot" element={<ChatbotPage />} />
-              <Route path="/scholarship" element={<Scholarship />} />
+              <Route path="/scholarship-timeline" element={<Scholarship />} />
               <Route path="/authentication" element={<Authentication />} />
               <Route element={<PrivateRoutes />}>
                 <Route path="/account" element={<Account />} />
@@ -54,20 +56,21 @@ export default function App() {
             {/* Catch all route */}
             <Route path="/*" element={<RouteNotFound />} />
           </Routes>
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </ScholarshipDataProvider>
       </UserDataProvider>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </Router>
+  </HelmetProvider>
   );
 }

@@ -71,19 +71,18 @@ export default function LatestScholarships() {
         </div>
       </div>
     </div>
-  );
-
-  return (
-    <section className="py-12 px-4 bg-gray-50">
+  );  return (
+    <section className="py-16 px-4 bg-gray-50" itemScope itemType="https://schema.org/ItemList" aria-labelledby="latest-scholarships-heading">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <header className="text-center mb-12">
           <div className="flex items-center justify-center gap-2 mb-4">
             <SparklesIcon />
-            <h2 className="text-3xl font-bold text-[#283d50]">
+            <h2 id="latest-scholarships-heading" className="text-3xl font-bold text-[#283d50]" itemProp="name">
               Latest Scholarship Opportunities
             </h2>
-          </div>          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          </div>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto" itemProp="description">
             Discover the newest scholarship opportunities from around the world. 
             Don&apos;t miss out on these fresh funding opportunities for your education.
           </p>
@@ -93,7 +92,7 @@ export default function LatestScholarships() {
               Showing {scholarships.length} latest scholarships
             </p>
           )}
-        </div>
+        </header>
 
         {/* Error State */}
         {error && (
@@ -117,39 +116,45 @@ export default function LatestScholarships() {
               <LoadingSkeleton key={index} />
             ))}
           </div>
-        )}
-
-        {/* Scholarships Grid */}
+        )}        {/* Scholarships Grid */}
         {!loading && !error && (
           <>
             {scholarships.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" itemProp="itemListElement">
                 {scholarships.map((scholarship, index) => (
-                  <ScholarshipCard 
-                    key={scholarship.id || index} 
-                    scholarship={scholarship} 
-                  />
+                  <div key={scholarship.id || index} role="listitem" itemScope itemType="https://schema.org/ScholarshipGrant">
+                    <ScholarshipCard 
+                      scholarship={scholarship} 
+                    />
+                  </div>
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12">
+              <div className="text-center py-12" role="status" aria-live="polite">
                 <div className="bg-white border border-gray-200 rounded-lg p-8 max-w-md mx-auto">
                   <SparklesIcon />
                   <h3 className="text-xl font-semibold text-gray-600 mb-2 mt-4">
                     No Scholarships Found
-                  </h3>                  <p className="text-gray-500">
+                  </h3>
+                  <p className="text-gray-500">
                     We&apos;re working on adding new scholarship opportunities. Check back soon!
                   </p>
                 </div>
               </div>
-            )}            {/* View All Button */}
+            )}
+
+            {/* View All Button */}
             {scholarships.length > 0 && (
               <div className="text-center mt-12">
                 <Link
                   to="/browse"
-                  className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#283d50] hover:bg-[#1e2d3d] transition-colors duration-200"
+                  className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#283d50] hover:bg-[#1e2d3d] transition-colors duration-200 shadow-lg hover:shadow-xl"
+                  aria-label="View all available scholarships"
                 >
                   View All Scholarships
+                  <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </Link>
               </div>
             )}
