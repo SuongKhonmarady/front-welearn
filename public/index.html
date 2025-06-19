@@ -34,20 +34,40 @@
 
   <!-- Viewport and Title -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OpenScholarships - Your Gateway to Global Scholarships</title>
+  <title>OpenScholarships - Scholarship</title>
 
   <!-- Structured Data for SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "ScholarLink",
-    "url": "https://scholarlink.site",
+    "name": "OpenScholarships Platform",
+    "alternateName": "OpenScholarships",
+    "url": "https://openscholarships.me",
     "author": {
-      "@type": "Person",
-      "name": "ScholarLink"
+      "@type": "EducationalOrganization",
+      "name": "OpenScholarships Admin",
+      "description": "Educational technology organization focused on scholarship accessibility"
     },
-    "description": "Connect with global scholarship opportunities through ScholarLink. Our platform helps you discover, track, and apply for scholarships worldwide."
+    "description": "Comprehensive scholarship management platform helping students discover, track, and manage global educational opportunities. Connect with universities worldwide through our advanced scholarship database.",
+    "keywords": "scholarships, education, university, grants, financial aid, student opportunities, global education",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://openscholarships.me/scholarships/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "mainEntity": {
+      "@type": "EducationalOccupationalProgram",
+      "name": "Scholarship Discovery Program",
+      "description": "Platform providing access to global scholarship opportunities for students",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "OpenScholarships Admin"
+      }
+    }
   }
   </script>
 </head>
