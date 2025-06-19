@@ -48,8 +48,23 @@ const CreateScholarship = ({ onClose }) => {
     }
   
     console.log('Formatted Deadline:', inputData.deadline);
+
+    // Convert old scraped data format to new API format
+    const scholarshipData = {
+      title: data.title || 'Untitled Scholarship',
+      description: data.message || data.description || inputData.description,
+      link: inputData.link,
+      official_link: inputData.link, // Use same link for both
+      post_at: new Date().toISOString().split('T')[0],
+      deadline: inputData.deadline,
+      eligibility: data.eligibility || '',
+      host_country: data.country || '',
+      host_university: data.university || '',
+      program_duration: data.duration || '',
+      degree_offered: data.degree || ''
+    };
   
-    const res = await createScholarship(data, inputData.link, inputData.deadline);
+    const res = await createScholarship(scholarshipData);
   
     if (res) {
       onClose();

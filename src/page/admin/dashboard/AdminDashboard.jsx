@@ -56,12 +56,12 @@ export default function AdminDashboard() {
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
     const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    
-    const total = listScholarship.length;
-    const active = listScholarship.filter(s => new Date(s.deadline) > currentDate).length;
-    const expired = listScholarship.filter(s => new Date(s.deadline) <= currentDate).length;
+    tomorrow.setDate(tomorrow.getDate() + 1);    const total = listScholarship.length;
+    const noDeadline = listScholarship.filter(s => !s.deadline || s.deadline.trim() === '').length;
+    const active = listScholarship.filter(s => s.deadline && s.deadline.trim() !== '' && new Date(s.deadline) > currentDate).length;
+    const expired = listScholarship.filter(s => s.deadline && s.deadline.trim() !== '' && new Date(s.deadline) <= currentDate).length;
     const urgent = listScholarship.filter(s => {
+      if (!s.deadline || s.deadline.trim() === '') return false;
       const deadline = new Date(s.deadline);
       const daysUntil = Math.ceil((deadline - currentDate) / (1000 * 60 * 60 * 24));
       return daysUntil <= 7 && daysUntil >= 0;
@@ -94,11 +94,11 @@ export default function AdminDashboard() {
       const createdDate = new Date(s.created_at || s.addedDate || s.post_at);
       return createdDate >= thisMonthStart && createdDate < tomorrow;
     }).length;
-    
-    return { 
+      return { 
       total, 
       active, 
       expired, 
+      noDeadline,
       urgent, 
       todayUploads, 
       yesterdayUploads, 

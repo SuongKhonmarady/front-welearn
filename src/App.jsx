@@ -4,6 +4,7 @@ import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import Homepage from "./page/user/home/Homepage";
 import UserAppLayout from "./ui/user/AppLayout";
+import AdminAppLayout from "./ui/admin/Applayout";
 import Scholarship from "./page/user/scholarshipTimeline/ScholarshipList";
 import BrowseScholarships from "./page/user/browseScholarships/BrowseScholarships";
 import ChatbotPage from "./page/user/chatbot/ChatbotPage";
@@ -16,10 +17,11 @@ import PrivateRoutes from "./ui/shared/PrivateRoute";
 import AdminPrivateRoute from "./ui/shared/AdminPrivateRoute";
 import RouteNotFound from "./ui/shared/RouteNotFound";
 import { ToastContainer } from "react-toastify";
-import ScholarshipList from "./page/admin/manageScholarship/ScholarshipList";
-import AdminDashboard from "./page/admin/dashboard/AdminDashboard";
+import { DashboardPage, AnalyticsPage, ScholarshipsManagementPage, CreateScholarshipPage } from "./page/admin/dashboard";
 import AuthDebug from "./debug/AuthDebug";
 import ScholarshipDetailPage from "./page/user/scholarshipDetail/ScholarshipDetailPage";
+import AdminScholarshipDetailPage from "./page/admin/dashboard/ScholarshipDetailPage";
+import EditScholarshipPage from "./page/admin/dashboard/EditScholarshipPage";
 
 export default function App() {
   return (
@@ -36,8 +38,15 @@ export default function App() {
             
             {/* Protected Admin Routes */}
             <Route element={<AdminPrivateRoute />}>
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/admin/manageScholarship" element={<ScholarshipList />} />
+              <Route element={<AdminAppLayout />}>
+                <Route path="/admin" element={<DashboardPage />} />
+                <Route path="/admin/dashboard" element={<DashboardPage />} />
+                <Route path="/admin/analytics" element={<AnalyticsPage />} />
+                <Route path="/admin/scholarships-management" element={<ScholarshipsManagementPage />} />
+                <Route path="/admin/scholarships-management/create" element={<CreateScholarshipPage />} />
+                <Route path="/admin/scholarships-management/:id" element={<AdminScholarshipDetailPage />} />
+                <Route path="/admin/scholarships-management/edit/:id" element={<EditScholarshipPage />} />
+              </Route>
             </Route>
             
             {/* User Routes */}

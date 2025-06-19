@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell } from 'recharts';
+import { ResponsiveContainer, Tooltip, PieChart, Pie, Cell } from 'recharts';
 import Button from '../../../../ui/shared/Button';
 
 // Colors for pie chart
@@ -7,15 +7,16 @@ const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
 
 // ScholarshipCard Component
 const ScholarshipCard = ({ scholarship }) => {
-  const deadlineDate = new Date(scholarship.deadline);
   const currentDate = new Date();
-  const daysUntilDeadline = Math.ceil((deadlineDate - currentDate) / (1000 * 60 * 60 * 24));
-  const isExpired = daysUntilDeadline < 0;
-  const isUrgent = daysUntilDeadline <= 7 && daysUntilDeadline >= 0;
-
+  const hasDeadline = scholarship.deadline && scholarship.deadline.trim() !== '';
+  const deadlineDate = hasDeadline ? new Date(scholarship.deadline) : null;
+  const daysUntilDeadline = hasDeadline ? Math.ceil((deadlineDate - currentDate) / (1000 * 60 * 60 * 24)) : null;
+  const isExpired = hasDeadline && daysUntilDeadline < 0;
+  const isUrgent = hasDeadline && daysUntilDeadline <= 7 && daysUntilDeadline >= 0;
+  const noDeadline = !hasDeadline;
   return (
     <div className={`bg-white rounded-xl shadow-lg p-6 border-l-4 hover:shadow-xl hover:scale-[1.02] transform transition-all duration-300 ease-in-out flex flex-col justify-between ${
-      isExpired ? 'border-l-red-500' : isUrgent ? 'border-l-yellow-500' : 'border-l-blue-500'
+      isExpired ? 'border-l-red-500' : isUrgent ? 'border-l-yellow-500' : noDeadline ? 'border-l-gray-500' : 'border-l-blue-500'
     }`}>
       <div>
         <div className="flex justify-between items-start mb-2">
@@ -28,10 +29,9 @@ const ScholarshipCard = ({ scholarship }) => {
         </div>
         <p className="text-gray-700 text-base mb-4 line-clamp-3">{scholarship.description}</p>
       </div>
-      <div>
-        <div className="text-sm text-gray-600 mb-3">
+      <div>        <div className="text-sm text-gray-600 mb-3">
           <p><strong className="font-medium">Provider:</strong> {scholarship.provider}</p>
-          <p><strong className="font-medium">Deadline:</strong> {deadlineDate.toLocaleDateString()}</p>
+          <p><strong className="font-medium">Deadline:</strong> {hasDeadline ? deadlineDate.toLocaleDateString() : 'No deadline'}</p>
           <p><strong className="font-medium">Days left:</strong> 
             <span className={`ml-1 ${isExpired ? 'text-red-600' : isUrgent ? 'text-yellow-600' : 'text-green-600'}`}>
               {isExpired ? 'Expired' : `${daysUntilDeadline} days`}
@@ -46,10 +46,9 @@ const ScholarshipCard = ({ scholarship }) => {
 ScholarshipCard.propTypes = {
   scholarship: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,    description: PropTypes.string.isRequired,
     provider: PropTypes.string.isRequired,
-    deadline: PropTypes.string.isRequired,
+    deadline: PropTypes.string, // Made optional since we now handle missing deadlines
     created_at: PropTypes.string,
     addedDate: PropTypes.string
   }).isRequired
@@ -57,12 +56,12 @@ ScholarshipCard.propTypes = {
 
 // Statistics Card Component
 const StatCard = ({ title, value, change, icon, color = "blue" }) => {
-  const colorClasses = {
-    blue: "bg-blue-50 text-blue-600 border-blue-200",
+  const colorClasses = {    blue: "bg-blue-50 text-blue-600 border-blue-200",
     green: "bg-green-50 text-green-600 border-green-200",
     yellow: "bg-yellow-50 text-yellow-600 border-yellow-200",
     red: "bg-red-50 text-red-600 border-red-200",
-    purple: "bg-purple-50 text-purple-600 border-purple-200"
+    purple: "bg-purple-50 text-purple-600 border-purple-200",
+    gray: "bg-gray-50 text-gray-600 border-gray-200"
   };
 
   return (
@@ -249,30 +248,10 @@ const Dashboard = ({
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Bar Chart */}
-        <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-          <h3 className="text-xl font-semibold mb-4">Scholarships Added Over Time</h3>
-          {aggregatedScholarshipData.length > 0 ? (
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={aggregatedScholarshipData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis allowDecimals={false} />
-                <Tooltip />
-                <Bar dataKey="Scholarships Added" fill="#3B82F6" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          ) : (
-            <div className="text-center text-gray-500 py-8">No data available</div>
-          )}
-        </div>
-
+      </div>      {/* Charts Section */}
+      <div className="grid grid-cols-1 gap-8">
         {/* Pie Chart */}
-        <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+        <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200 max-w-2xl mx-auto">
           <h3 className="text-xl font-semibold mb-4">Scholarship Status Distribution</h3>
           {pieChartData.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>

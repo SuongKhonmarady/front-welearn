@@ -28,13 +28,13 @@ export default function Hero() {
             <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
-            <span className="text-sm font-medium text-gray-700">Application Management</span>
+            <span className="text-sm font-medium text-gray-700">100% Free Platform</span>
           </div>
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
-            <span className="text-sm font-medium text-gray-700">100% Free Platform</span>
+            <span className="text-sm font-low text-gray-700">New scholarship uploads every single day</span>
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 mt-6">
