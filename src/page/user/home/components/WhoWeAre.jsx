@@ -8,7 +8,7 @@ export default function WhoWeAre() {
           <img src={team} alt="" className="w-full h-full" />
         </div>
         <div className="flex flex-col gap-5 md:w-1/2 p-5">
-          <h1 className="text-3xl font-semibold text-center">Who We Are</h1>
+          <h2 className="text-3xl font-semibold text-center">Who We Are</h2>
           <p className="text-white">
             We are a dedicated platform focused on connecting Cambodian students with educational opportunities worldwide. 
             Our mission is to make global scholarships accessible and manageable for every aspiring student. Through our 

@@ -3,7 +3,7 @@ import dog from "../../../../assets/img/Hero.png";
 export default function TeamWork() {
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-3xl font-semibold text-center">Team Work</h1>
+      <h2 className="text-3xl font-semibold text-center">Team Work</h2>
       <p className="text-center">
         We build this website for our final project of year 3 RUPP
       </p>
