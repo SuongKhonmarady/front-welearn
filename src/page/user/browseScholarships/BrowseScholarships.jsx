@@ -8,7 +8,6 @@ import {
 } from "../../../context/scholarship/Scholarship";
 import useDebounce from '../../../hook/useDebounce';
 import ScholarshipCard from './components/ScholarshipCard';
-import FilterSection from './components/FilterSection';
 
 export default function BrowseScholarships() {
   const [scholarships, setScholarships] = useState([]);
@@ -179,79 +178,239 @@ export default function BrowseScholarships() {
   useEffect(() => {
     setDisplayedResults(filteredResults.slice(0, ITEMS_PER_PAGE));
     setCurrentPage(1);
-  }, [filteredResults]);
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#283d50] to-blue-600 rounded-full mb-6">
-            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  }, [filteredResults]);  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4 py-6">
+        {/* Simplified Hero Section */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-slate-800 rounded-lg mb-4">
+            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-[#283d50] mb-4">
-            Discover Your Perfect
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Scholarship</span>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">
+            Browse Scholarships
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore thousands of scholarship opportunities from universities worldwide. 
-            Your journey to global education starts here.
+          <p className="text-gray-600 text-sm sm:text-base max-w-lg mx-auto">
+            Find your perfect scholarship opportunity from thousands of programs worldwide
           </p>
         </div>
 
-        {/* Filter Section */}
-        <div className="mb-8">
-          <FilterSection
-            filterType={filterType}
-            setFilterType={setFilterType}
-            inputValue={inputValue}
-            handleInputChange={handleInputChange}
-            searchStatus={searchStatus}
-            regionFilter={regionFilter}
-            setRegionFilter={setRegionFilter}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            handleFilter={handleFilter}
-          />
+        {/* Mobile-Friendly Filter Section */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+          {/* Filter Header */}
+          <div className="bg-slate-800 px-4 py-3 rounded-t-xl">
+            <h3 className="text-white font-medium text-sm flex items-center">
+              <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+              </svg>
+              Filter & Search
+            </h3>
+          </div>
+
+          {/* Filter Controls */}
+          <div className="p-4 space-y-4">
+            {/* Filter Type - Full Width on Mobile */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Filter Type</label>
+              <select
+                value={filterType}
+                onChange={(e) => {
+                  setFilterType(e.target.value);
+                  if (handleInputChange) {
+                    handleInputChange({ target: { value: "" } });
+                  }
+                }}
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm"
+              >
+                <option value="upcoming">🕒 Upcoming Deadlines</option>
+                <option value="title">🔍 Search by Title</option>
+                <option value="country">🌍 By Country</option>
+                <option value="degree">🎓 By Degree Level</option>
+                <option value="region">📍 By Region</option>
+              </select>
+            </div>
+
+            {/* Dynamic Filter Input */}
+            {filterType === "title" && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Scholarship Title</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    placeholder="Enter scholarship title..."
+                    className="w-full px-3 py-2 pr-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm"
+                  />
+                  {searchStatus && (
+                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                      {searchStatus === "Searching..." ? (
+                        <svg className="animate-spin h-4 w-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                      ) : (
+                        <span className="text-xs text-green-500">✓</span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {filterType === "country" && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Host Country</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    placeholder="e.g., USA, Canada, UK..."
+                    className="w-full px-3 py-2 pr-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm"
+                  />
+                  {searchStatus && (
+                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                      {searchStatus === "Searching..." ? (
+                        <svg className="animate-spin h-4 w-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                      ) : (
+                        <span className="text-xs text-green-500">✓</span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {filterType === "degree" && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Degree Level</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    placeholder="e.g., Bachelor, Master, PhD..."
+                    className="w-full px-3 py-2 pr-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm"
+                  />
+                  {searchStatus && (
+                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                      {searchStatus === "Searching..." ? (
+                        <svg className="animate-spin h-4 w-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                      ) : (
+                        <span className="text-xs text-green-500">✓</span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {filterType === "region" && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Select Region</label>
+                <select
+                  value={regionFilter}
+                  onChange={(e) => setRegionFilter(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm"
+                >
+                  <option value="">Choose a region...</option>
+                  <option value="Asia">🌏 Asia</option>
+                  <option value="Europe">🇪🇺 Europe</option>
+                  <option value="North America">🌎 North America</option>
+                  <option value="Oceania">🌊 Oceania</option>
+                  <option value="Africa">🌍 Africa</option>
+                </select>
+              </div>
+            )}
+
+            {/* Sort and Search Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm"
+                >
+                  <option value="deadline">⏰ Deadline (Soonest First)</option>
+                  <option value="newest">✨ Newest Listings</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-transparent mb-2">Search</label>
+                <button
+                  onClick={handleFilter}
+                  className="w-full px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium flex items-center justify-center"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  Search
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Filter Tags */}
+            <div className="pt-3 border-t border-gray-100">
+              <p className="text-xs font-medium text-gray-700 mb-2">Quick Filters:</p>
+              <div className="flex flex-wrap gap-2">
+                {["USA", "UK", "Master", "PhD", "Merit"].map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => {
+                      if (["Master", "PhD"].includes(tag)) {
+                        setFilterType("degree");
+                        handleInputChange({ target: { value: tag } });
+                      } else if (tag === "Merit") {
+                        setFilterType("title");
+                        handleInputChange({ target: { value: tag } });
+                      } else {
+                        setFilterType("country");
+                        handleInputChange({ target: { value: tag } });
+                      }
+                    }}
+                    className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full hover:bg-blue-100 hover:text-blue-700 transition-colors border border-gray-200"
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Results Section */}
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
           {/* Results Header */}
           {!loading && filteredResults.length > 0 && (
-            <div className="bg-gradient-to-r from-[#283d50] to-blue-600 px-6 py-4">
+            <div className="bg-slate-800 px-4 py-3 rounded-t-xl">
               <div className="flex items-center justify-between text-white">
-                <div className="flex items-center space-x-3">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                  </svg>
-                  <span className="font-semibold">Search Results</span>
-                </div>
-                <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
-                  {displayedResults.length} of {filteredResults.length} scholarships
+                <span className="text-sm font-medium">Search Results</span>
+                <span className="bg-white/20 px-2 py-1 rounded-full text-xs">
+                  {displayedResults.length} of {filteredResults.length}
                 </span>
               </div>
             </div>
           )}
 
           {/* Results Content */}
-          <div className="p-6">
+          <div className="p-4">
             {loading ? (
-              <div className="flex flex-col items-center justify-center py-16">
-                <div className="relative">
-                  <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </div>
-                </div>                <p className="mt-4 text-gray-600 font-medium">Finding the best scholarships for you...</p>
-                <p className="text-sm text-gray-500">This won&apos;t take long</p>
+              <div className="flex flex-col items-center justify-center py-12">
+                <div className="w-8 h-8 border-2 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-3"></div>
+                <p className="text-gray-600 text-sm">Finding scholarships...</p>
               </div>
             ) : displayedResults.length > 0 ? (
               <>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {displayedResults.map((scholarship) => (
                     <ScholarshipCard key={scholarship.id} scholarship={scholarship} />
                   ))}
@@ -259,28 +418,25 @@ export default function BrowseScholarships() {
                 
                 {/* Show More Button */}
                 {displayedResults.length < filteredResults.length && (
-                  <div className="flex justify-center mt-12">
+                  <div className="flex justify-center mt-6">
                     <button
                       onClick={handleShowMore}
                       disabled={loadingMore}
-                      className="group relative px-8 py-4 bg-gradient-to-r from-[#283d50] to-blue-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-3"
+                      className="px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm"
                     >
                       {loadingMore ? (
                         <>
-                          <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          Loading More...
+                          Loading...
                         </>
                       ) : (
                         <>
-                          <svg className="w-5 h-5 group-hover:rotate-180 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                          </svg>
-                          Load More Scholarships
-                          <span className="bg-white bg-opacity-20 px-2 py-1 rounded-full text-xs">
-                            {filteredResults.length - displayedResults.length} remaining
+                          Load More
+                          <span className="bg-white/20 px-2 py-1 rounded-full text-xs">
+                            {filteredResults.length - displayedResults.length} more
                           </span>
                         </>
                       )}
@@ -289,35 +445,32 @@ export default function BrowseScholarships() {
                 )}
               </>
             ) : (
-              <div className="text-center py-16">
-                <div className="relative mx-auto w-32 h-32 mb-8">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full"></div>
-                  <div className="absolute inset-4 bg-white rounded-full flex items-center justify-center">
-                    <svg className="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </div>
-                </div>                <h3 className="text-2xl font-bold text-gray-900 mb-4">No Scholarships Found</h3>
-                <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                  We couldn&apos;t find any scholarships matching your criteria. 
-                  Try adjusting your filters or check back later for new opportunities.
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">No Scholarships Found</h3>
+                <p className="text-gray-600 mb-6 text-sm max-w-sm mx-auto">
+                  Try adjusting your filters or search terms to find more opportunities.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <button 
                     onClick={() => {
                       setFilterType("upcoming");
                       setInputValue("");
                       setRegionFilter("");
                     }}
-                    className="px-6 py-3 bg-[#283d50] text-white rounded-lg hover:bg-[#1e2d3d] transition-colors font-medium"
+                    className="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium text-sm"
                   >
                     Reset Filters
                   </button>
                   <button 
                     onClick={fetchInitialScholarships}
-                    className="px-6 py-3 border border-[#283d50] text-[#283d50] rounded-lg hover:bg-[#283d50] hover:text-white transition-colors font-medium"
+                    className="px-4 py-2 border border-slate-800 text-slate-800 rounded-lg hover:bg-slate-800 hover:text-white transition-colors font-medium text-sm"
                   >
-                    Refresh Results
+                    Refresh
                   </button>
                 </div>
               </div>

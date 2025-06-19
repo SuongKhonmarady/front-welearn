@@ -126,48 +126,34 @@ const Dashboard = ({
             </span>
           </Button>
         </div>
-      </div>
-
-      {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
-        <StatCard
-          title="Total Scholarships"
-          value={scholarshipStats.total}
-          icon="🎓"
-          color="blue"
-        />
-        <StatCard
-          title="Active Scholarships"
-          value={scholarshipStats.active}
-          icon="✅"
-          color="green"
-        />
-        <StatCard
-          title="Urgent (≤7 days)"
-          value={scholarshipStats.urgent}
-          icon="⚠️"
-          color="yellow"
-        />
-        <StatCard
-          title="Expired"
-          value={scholarshipStats.expired}
-          icon="❌"
-          color="red"
-        />
-        <StatCard
-          title="Today New Upload"
-          value={scholarshipStats.todayUploads}
-          change={scholarshipStats.todayUploads > 0 ? `+${scholarshipStats.todayUploads}` : '0'}
-          icon="📈"
-          color="green"
-        />
-        <StatCard
-          title="Yesterday New Upload"
-          value={scholarshipStats.yesterdayUploads}
-          change={scholarshipStats.yesterdayUploads > 0 ? `+${scholarshipStats.yesterdayUploads}` : '0'}
-          icon="📊"
-          color="purple"
-        />
+      </div>      {/* Statistics Cards */}
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl">
+          <StatCard
+            title="Total Scholarships"
+            value={scholarshipStats.total}
+            icon="🎓"
+            color="blue"
+          />
+          <StatCard
+            title="Active Scholarships"
+            value={scholarshipStats.active}
+            icon="✅"
+            color="green"
+          />
+          <StatCard
+            title="Urgent (≤7 days)"
+            value={scholarshipStats.urgent}
+            icon="⚠️"
+            color="yellow"
+          />
+          <StatCard
+            title="Expired"
+            value={scholarshipStats.expired}
+            icon="⏰"
+            color="red"
+          />
+        </div>
       </div>
 
       {/* Daily Analytics Section */}

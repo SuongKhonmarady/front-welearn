@@ -4,7 +4,7 @@ import ScholarshipDataContext from "../../../context/scholarship/ScholarshipCont
 import { getScholarship } from "../../../context/scholarship/Scholarship";
 import { logOut } from "../../../context/user/UserAction";
 import CreateScholarship from "../manageScholarship/components/CreateScholarship";
-import Logo from "../../../assets/Logo.png";
+import Logo from "../../../assets/logo_.png";
 import Spinner from "../../../ui/shared/Spinner";
 
 // Import the new components
@@ -311,7 +311,7 @@ export default function AdminDashboard() {
                 <img src={Logo} alt="WeLearn Logo" className="h-10 w-10" />
               </Link>
               <div className="text-white text-xl font-bold">
-                Scholarship Admin
+                Openscholarship Admin
               </div>
             </div>
 
