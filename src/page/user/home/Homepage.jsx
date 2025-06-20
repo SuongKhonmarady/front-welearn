@@ -165,10 +165,10 @@ export default function Homepage() {
     <>
       <Helmet>
         {/* Primary Meta Tags */}
-        <title>OpenScholarships - Discover Global Education Funding Opportunities | Free Scholarship Platform 2025</title>
+        <title>OpenScholarships - Global Education Funding Platform</title>
         <meta 
           name="title" 
-          content="OpenScholarships - Discover Global Education Funding Opportunities | Free Scholarship Platform 2025" 
+          content="OpenScholarships - Global Education Funding Platform" 
         />
         <meta 
           name="description" 
@@ -193,7 +193,7 @@ export default function Homepage() {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:title" content="OpenScholarships - Your Gateway to Global Educational Opportunities 2025" />
+        <meta property="og:title" content="OpenScholarships - Global Education Platform" />
         <meta 
           property="og:description" 
           content="Discover thousands of scholarship opportunities worldwide in 2025. Our platform helps students find funding, track deadlines, and manage applications for universities globally." 
@@ -210,7 +210,7 @@ export default function Homepage() {
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={canonicalUrl} />
-        <meta property="twitter:title" content="OpenScholarships - Discover Global Education Funding 2025" />
+        <meta property="twitter:title" content="OpenScholarships - Global Education Funding" />
         <meta 
           property="twitter:description" 
           content="Find scholarships worldwide in 2025. Track deadlines, manage applications, and discover funding opportunities for your education." 

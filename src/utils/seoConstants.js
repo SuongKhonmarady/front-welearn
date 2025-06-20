@@ -1,9 +1,8 @@
 // Sitemap data for SEO
 export const sitemapData = {
-  pages: [
-    {
+  pages: [    {
       url: '/',
-      title: 'Homepage - OpenScholarships',
+      title: 'Home - OpenScholarships',
       description: 'Discover global scholarship opportunities and educational funding',
       changefreq: 'daily',
       priority: '1.0',
@@ -11,7 +10,7 @@ export const sitemapData = {
     },
     {
       url: '/browse',
-      title: 'Browse Scholarships - OpenScholarships',
+      title: 'Browse - OpenScholarships',
       description: 'Search and filter through thousands of scholarship opportunities',
       changefreq: 'daily',
       priority: '0.9',
@@ -19,7 +18,7 @@ export const sitemapData = {
     },
     {
       url: '/scholarship-timeline',
-      title: 'Scholarship Timeline - OpenScholarships',
+      title: 'Timeline - OpenScholarships',
       description: 'Track scholarship deadlines and important dates',
       changefreq: 'weekly',
       priority: '0.8',
