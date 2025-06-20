@@ -77,7 +77,7 @@ export default function Homepage() {
       "International Education"
     ],
     "sameAs": [
-      "https://facebook.com/openscholarships",
+      "https://web.facebook.com/profile.php?id=61577632620312",
       "https://twitter.com/openscholarships",
       "https://linkedin.com/company/openscholarships"
     ],
