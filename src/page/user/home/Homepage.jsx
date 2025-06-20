@@ -201,7 +201,7 @@ export default function Homepage() {
         <meta property="og:image" content={`${canonicalUrl}/logo_.png`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="OpenScholarships - Global Education Funding Platform" />
+        <meta property="og:image:alt" content="OpenScholarships - Global Education Platform" />
         <meta property="og:site_name" content="OpenScholarships" />
         <meta property="og:locale" content="en_US" />
         <meta property="article:author" content="OpenScholarships" />
@@ -210,7 +210,7 @@ export default function Homepage() {
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={canonicalUrl} />
-        <meta property="twitter:title" content="OpenScholarships - Global Education Funding" />
+        <meta property="twitter:title" content="OpenScholarships - Global Education Platform" />
         <meta 
           property="twitter:description" 
           content="Find scholarships worldwide in 2025. Track deadlines, manage applications, and discover funding opportunities for your education." 

@@ -12,8 +12,9 @@ Disallow: /admin/
 # Disallow debug routes
 Disallow: /debug-auth
 
-# Allow search engines to access static assets
+# Allow search engines to access static assets and images
 Allow: /static/
+Allow: /logo_.png
 Allow: *.css
 Allow: *.js
 Allow: *.png
