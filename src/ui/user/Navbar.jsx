@@ -28,7 +28,7 @@ export default function Navbar() {
   }, []);
 
   const Links = [
-    { name: "browse scholarships", link: "/browse", image: school },
+    { name: "browse scholarships", link: "/browse-scholarship", image: school },
     { name: "scholarship timeline", link: "/scholarship-timeline", image: school },
     // { name: "AI Assistant", link: "/chatbot", image: school },
     // { name: "Account", link: "/account", image: school },
