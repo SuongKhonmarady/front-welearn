@@ -25,6 +25,7 @@ import EditScholarshipPage from "./page/admin/dashboard/EditScholarshipPage";
 import CookieConsent from "./components/CookieConsent";
 import PrivacyPolicy from "./page/user/privacy/PrivacyPolicy";
 import ScrollToTop from "./components/ScrollToTop";
+import DataSources from "./page/user/sources/DataSources";
 
 export default function App() {
   return (
@@ -56,12 +57,13 @@ export default function App() {
             {/* User Routes */}
             <Route element={<UserAppLayout />}>
               <Route index element={<Homepage />} />
-              <Route path="/browse" element={<BrowseScholarships />} />
+              <Route path="/browse-scholarships" element={<BrowseScholarships />} />
               <Route path="/scholarship/:id" element={<ScholarshipDetailPage />} />
               <Route path="/chatbot" element={<ChatbotPage />} />
               <Route path="/scholarship-timeline" element={<Scholarship />} />
               <Route path="/authentication" element={<Authentication />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/data-sources" element={<DataSources />} />
               <Route element={<PrivateRoutes />}>
                 <Route path="/account" element={<Account />} />
               </Route>

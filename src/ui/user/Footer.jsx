@@ -44,11 +44,11 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-gray-300">
               <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
-              {/* <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li> */}
-              <li><Link to="/scholarship" className="hover:text-white transition-colors">Scholarships</Link></li>
+              <li><Link to="/browse-scholarships" className="hover:text-white transition-colors">Browse scholarship</Link></li>
+              <li><Link to="/scholarship-timeline" className="hover:text-white transition-colors">Scholarships timeline</Link></li>
+              <li><Link to="/data-sources" className="hover:text-white transition-colors">Data Sources</Link></li>
               {/* <li><Link to="/rankquiz" className="hover:text-white transition-colors">Quiz</Link></li>
               <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li> */}
-              <li><Link to="/admin/login" className="hover:text-white transition-colors">Admin Login</Link></li>
             </ul>
           </div>
 
