@@ -24,11 +24,13 @@ import AdminScholarshipDetailPage from "./page/admin/dashboard/ScholarshipDetail
 import EditScholarshipPage from "./page/admin/dashboard/EditScholarshipPage";
 import CookieConsent from "./components/CookieConsent";
 import PrivacyPolicy from "./page/user/privacy/PrivacyPolicy";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         <UserDataProvider>
           <ScholarshipDataProvider>
           <Routes>
