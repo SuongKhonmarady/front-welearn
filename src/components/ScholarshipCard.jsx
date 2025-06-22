@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { trackScholarshipView} from '../utils/analytics';
 
 export default function ScholarshipCard({ scholarship }) {
+  // Track scholarship view when component mounts
+  React.useEffect(() => {
+    if (scholarship && scholarship.id && scholarship.title) {
+      trackScholarshipView(scholarship.id, scholarship.title);
+    }
+  }, [scholarship]);
   const formatDate = (dateString) => {
     if (!dateString) return 'No deadline specified';
     try {
@@ -114,5 +122,6 @@ ScholarshipCard.propTypes = {
     official_link: PropTypes.string,
     link: PropTypes.string,
     host_university: PropTypes.string,
+    apply_link: PropTypes.string,
   }).isRequired,
 };

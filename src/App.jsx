@@ -22,6 +22,7 @@ import AuthDebug from "./debug/AuthDebug";
 import ScholarshipDetailPage from "./page/user/scholarshipDetail/ScholarshipDetailPage";
 import AdminScholarshipDetailPage from "./page/admin/dashboard/ScholarshipDetailPage";
 import EditScholarshipPage from "./page/admin/dashboard/EditScholarshipPage";
+import CookieConsent from "./components/CookieConsent";
 
 export default function App() {
   return (
@@ -77,6 +78,7 @@ export default function App() {
             pauseOnHover
             theme="light"
           />
+          <CookieConsent />
         </ScholarshipDataProvider>
       </UserDataProvider>
     </Router>
