@@ -23,7 +23,7 @@ import ScholarshipDetailPage from "./page/user/scholarshipDetail/ScholarshipDeta
 import AdminScholarshipDetailPage from "./page/admin/dashboard/ScholarshipDetailPage";
 import EditScholarshipPage from "./page/admin/dashboard/EditScholarshipPage";
 import CookieConsent from "./components/CookieConsent";
-import PrivacyPolicy from "./page/user/privacy/PrivacyPolicy";
+import PrivacyPolicySimple from "./page/user/privacy/PrivacyPolicySimple";
 import ScrollToTop from "./components/ScrollToTop";
 import DataSources from "./page/user/sources/DataSources";
 
@@ -62,7 +62,7 @@ export default function App() {
               <Route path="/chatbot" element={<ChatbotPage />} />
               <Route path="/scholarship-timeline" element={<Scholarship />} />
               <Route path="/authentication" element={<Authentication />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicySimple />} />
               <Route path="/data-sources" element={<DataSources />} />
               <Route element={<PrivateRoutes />}>
                 <Route path="/account" element={<Account />} />

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.49d92f9d.css",
-    "main.js": "/static/js/main.9ce10742.js",
+    "main.css": "/static/css/main.4d86ec9b.css",
+    "main.js": "/static/js/main.a78a26b8.js",
     "static/media/logo_.png": "/static/media/logo_.2754c54976598ed860ea.png",
     "static/media/scholarship.png": "/static/media/scholarship.4d367fd79374832985bb.png",
     "static/media/Logo.png": "/static/media/Logo.42230503f0fe9f554ac1.png",
@@ -12,11 +12,11 @@
     "static/media/closeModal.svg": "/static/media/closeModal.89c792204754c8d8a26cc11bbb42322c.svg",
     "static/media/close.svg": "/static/media/close.0353bb049665f27227f192b97780acbf.svg",
     "static/media/menu.svg": "/static/media/menu.acb0a738689208be3a209bbe37e7c7f2.svg",
-    "main.49d92f9d.css.map": "/static/css/main.49d92f9d.css.map",
-    "main.9ce10742.js.map": "/static/js/main.9ce10742.js.map"
+    "main.4d86ec9b.css.map": "/static/css/main.4d86ec9b.css.map",
+    "main.a78a26b8.js.map": "/static/js/main.a78a26b8.js.map"
   },
   "entrypoints": [
-    "static/css/main.49d92f9d.css",
-    "static/js/main.9ce10742.js"
+    "static/css/main.4d86ec9b.css",
+    "static/js/main.a78a26b8.js"
   ]
 }

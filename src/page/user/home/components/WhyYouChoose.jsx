@@ -19,9 +19,9 @@ export default function WhyYouChoose() {
     },
     {
       icon: test,
-      title: "Application Management",
-      description: "Organize your scholarship applications, track progress, and manage required documents in one place"
-    }
+      title: "Free & Easy Access",
+      description: "Browse and discover scholarship opportunities completely free with no registration required"
+    },
   ];
 
   return (
@@ -35,7 +35,7 @@ export default function WhyYouChoose() {
           and manage scholarship opportunities from around the world.
         </p>
         
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto' itemProp="itemListElement">
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto justify-items-center' itemProp="itemListElement">
           {features.map((feature, index) => (
             <div 
               key={index}
