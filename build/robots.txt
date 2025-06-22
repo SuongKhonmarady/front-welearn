@@ -1,16 +1,23 @@
 User-agent: *
 Allow: /
 
-# Important pages
+# Important pages for SEO and user navigation
 Allow: /browse
+Allow: /browse-scholarships
 Allow: /scholarship-timeline
-Allow: /chatbot
+Allow: /scholarship/
+Allow: /privacy-policy
+Allow: /data-sources
 
 # Disallow admin and authentication pages
 Disallow: /admin/
+Disallow: /authentication
 
 # Disallow debug routes
 Disallow: /debug-auth
+
+# Disallow user account pages (private content)
+Disallow: /account
 
 # Allow search engines to access static assets and images
 Allow: /static/
