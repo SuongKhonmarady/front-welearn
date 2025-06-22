@@ -95,9 +95,9 @@ export default function Footer() {
 
         {/* Footer Bottom */}
         <div className="border-t border-gray-700 py-6 text-sm text-center md:flex md:justify-between md:text-left">
-          <p>© {currentYear} WeLearn. All rights reserved.</p>
+          <p>© {currentYear} Openscholarships. All rights reserved.</p>
           <div className="mt-2 md:mt-0 space-x-4">
-            <Link to="/privacy" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="text-gray-300 hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
