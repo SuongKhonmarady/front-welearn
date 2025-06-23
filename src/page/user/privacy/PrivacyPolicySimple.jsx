@@ -27,12 +27,10 @@ const PrivacyPolicySimple = () => {
                     })}
                   </p>
                 </div>
-              </div>
-  
-              {/* Quick Summary */}
+              </div>              {/* Quick Summary */}
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-8">
-                <h2 className="text-xl sm:text-2xl font-bold text-blue-900 mb-4 flex items-center">
-                  <span className="mr-2">📋</span> Quick Summary
+                <h2 className="text-xl sm:text-2xl font-bold text-blue-900 mb-4">
+                  Quick Summary
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
@@ -63,12 +61,10 @@ const PrivacyPolicySimple = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-  
-              {/* Introduction */}
+              </div>              {/* Introduction */}
               <section className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6 flex items-center">
-                  <span className="mr-3">🛡️</span> Introduction
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6">
+                  Introduction
                 </h2>
                 <div className="prose prose-gray max-w-none">
                   <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
@@ -79,18 +75,16 @@ const PrivacyPolicySimple = () => {
                     By using our website, you agree to the practices described in this policy.
                   </p>
                 </div>
-              </section>
-  
-              {/* What We Collect */}
+              </section>              {/* What We Collect */}
               <section className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6 flex items-center">
-                  <span className="mr-3">📊</span> What Information We Collect
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6">
+                  What Information We Collect
                 </h2>
                 
                 {/* No Personal Data */}
                 <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
-                  <h3 className="text-xl font-semibold text-green-800 mb-3 flex items-center">
-                    <span className="mr-2">✅</span> Good News: No Personal Information Required
+                  <h3 className="text-xl font-semibold text-green-800 mb-3">
+                    Good News: No Personal Information Required
                   </h3>
                   <p className="text-green-700 mb-3">
                     Our platform operates without requiring user registration or personal accounts. You can browse scholarships completely anonymously.
@@ -104,8 +98,8 @@ const PrivacyPolicySimple = () => {
   
                 {/* Automatic Information */}
                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-6">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                    <span className="mr-2">🔍</span> Automatic Information Collection
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    Automatic Information Collection
                   </h3>
                   <p className="text-gray-700 mb-4">
                     Like most websites, we automatically collect some technical information to improve our service:
@@ -141,12 +135,10 @@ const PrivacyPolicySimple = () => {
                     </div>
                   </div>
                 </div>
-              </section>
-  
-              {/* Google Analytics */}
+              </section>              {/* Google Analytics */}
               <section className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6 flex items-center">
-                  <span className="mr-3">📈</span> Google Analytics & Cookies
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6">
+                  Google Analytics & Cookies
                 </h2>
                 
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-6">
@@ -155,9 +147,8 @@ const PrivacyPolicySimple = () => {
                     We use Google Analytics to understand how visitors use our site, but <strong>only with your permission</strong>.
                   </p>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-white p-4 rounded-lg border border-blue-200">
-                      <h4 className="font-semibold text-blue-800 mb-2">✅ If You Accept Cookies:</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">                    <div className="bg-white p-4 rounded-lg border border-blue-200">
+                      <h4 className="font-semibold text-blue-800 mb-2">If You Accept Cookies:</h4>
                       <ul className="text-sm text-blue-700 space-y-1">
                         <li>• Help us improve the website</li>
                         <li>• Show you popular scholarships</li>
@@ -167,7 +158,7 @@ const PrivacyPolicySimple = () => {
                     </div>
                     
                     <div className="bg-white p-4 rounded-lg border border-blue-200">
-                      <h4 className="font-semibold text-blue-800 mb-2">❌ If You Decline Cookies:</h4>
+                      <h4 className="font-semibold text-blue-800 mb-2">If You Decline Cookies:</h4>
                       <ul className="text-sm text-blue-700 space-y-1">
                         <li>• Full website functionality remains</li>
                         <li>• No tracking or analytics</li>
@@ -176,28 +167,23 @@ const PrivacyPolicySimple = () => {
                       </ul>
                     </div>
                   </div>
-                </div>
-  
-                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-yellow-800 mb-2 flex items-center">
-                    <span className="mr-2">🔄</span> Change Your Mind Anytime
+                </div>                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                  <h3 className="text-lg font-semibold text-yellow-800 mb-2">
+                    Change Your Mind Anytime
                   </h3>
                   <p className="text-yellow-700">
                     You can change your cookie preferences by clearing your browser data or contacting us. 
                     Your choice is saved and respected for future visits.
                   </p>
                 </div>
-              </section>
-  
-              {/* How We Use Information */}
+              </section>              {/* How We Use Information */}
               <section className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6 flex items-center">
-                  <span className="mr-3">🎯</span> How We Use Information
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6">
+                  How We Use Information
                 </h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-xl p-6 text-center">
-                    <div className="text-3xl mb-3">🚀</div>
                     <h3 className="text-lg font-semibold text-green-800 mb-2">Improve Service</h3>
                     <p className="text-sm text-green-700">
                       Enhance search results, fix bugs, and optimize user experience
@@ -205,7 +191,6 @@ const PrivacyPolicySimple = () => {
                   </div>
                   
                   <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-6 text-center">
-                    <div className="text-3xl mb-3">📊</div>
                     <h3 className="text-lg font-semibold text-blue-800 mb-2">Analytics</h3>
                     <p className="text-sm text-blue-700">
                       Understand popular scholarships and user preferences
@@ -213,24 +198,21 @@ const PrivacyPolicySimple = () => {
                   </div>
                   
                   <div className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-xl p-6 text-center">
-                    <div className="text-3xl mb-3">🔧</div>
                     <h3 className="text-lg font-semibold text-purple-800 mb-2">Maintenance</h3>
                     <p className="text-sm text-purple-700">
                       Monitor performance and ensure reliable service
                     </p>
                   </div>
                 </div>
-              </section>
-  
-              {/* Data Protection */}
+              </section>              {/* Data Protection */}
               <section className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6 flex items-center">
-                  <span className="mr-3">🔒</span> Your Data Protection
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6">
+                  Your Data Protection
                 </h2>
                 
                 <div className="bg-red-50 border border-red-200 rounded-xl p-6 mb-6">
-                  <h3 className="text-xl font-semibold text-red-800 mb-4 flex items-center">
-                    <span className="mr-2">🚫</span> We Never Sell Your Data
+                  <h3 className="text-xl font-semibold text-red-800 mb-4">
+                    We Never Sell Your Data
                   </h3>
                   <p className="text-red-700 text-lg">
                     <strong>Promise:</strong> We do not sell, rent, or trade any information to third parties. 
@@ -240,29 +222,24 @@ const PrivacyPolicySimple = () => {
   
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-2">🔐</div>
-                    <h4 className="font-semibold text-gray-800">SSL Encryption</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">SSL Encryption</h4>
                     <p className="text-sm text-gray-600">Secure data transmission</p>
                   </div>
                   
                   <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-2">🛡️</div>
-                    <h4 className="font-semibold text-gray-800">Secure Servers</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">Secure Servers</h4>
                     <p className="text-sm text-gray-600">Protected infrastructure</p>
                   </div>
                   
                   <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-2">👀</div>
-                    <h4 className="font-semibold text-gray-800">Regular Monitoring</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">Regular Monitoring</h4>
                     <p className="text-sm text-gray-600">Continuous security checks</p>
                   </div>
                 </div>
-              </section>
-  
-              {/* Your Rights */}
+              </section>              {/* Your Rights */}
               <section className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6 flex items-center">
-                  <span className="mr-3">⚖️</span> Your Privacy Rights
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6">
+                  Your Privacy Rights
                 </h2>
                 
                 <div className="bg-purple-50 border border-purple-200 rounded-xl p-6">
@@ -270,7 +247,7 @@ const PrivacyPolicySimple = () => {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-semibold text-purple-800 mb-3">✅ You Can:</h4>
+                      <h4 className="font-semibold text-purple-800 mb-3">You Can:</h4>
                       <ul className="space-y-2">
                         <li className="flex items-center text-purple-700">
                           <span className="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
@@ -290,9 +267,8 @@ const PrivacyPolicySimple = () => {
                         </li>
                       </ul>
                     </div>
-                    
-                    <div>
-                      <h4 className="font-semibold text-purple-800 mb-3">🛠️ How To:</h4>
+                      <div>
+                      <h4 className="font-semibold text-purple-800 mb-3">How To:</h4>
                       <ul className="space-y-2">
                         <li className="flex items-center text-purple-700">
                           <span className="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
@@ -314,16 +290,13 @@ const PrivacyPolicySimple = () => {
                     </div>
                   </div>
                 </div>
-              </section>
-  
-              {/* External Links */}
+              </section>              {/* External Links */}
               <section className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6 flex items-center">
-                  <span className="mr-3">🔗</span> External Links & Applications
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6">
+                  External Links & Applications
                 </h2>
                   <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
                   <div className="flex items-start mb-4">
-                    <div className="text-2xl mr-3">⚠️</div>
                     <div>
                       <h3 className="text-lg font-semibold text-yellow-800 mb-2">Important Notice</h3>
                       <p className="text-yellow-700">
@@ -340,12 +313,10 @@ const PrivacyPolicySimple = () => {
                     </p>
                   </div>
                 </div>
-              </section>
-  
-              {/* Updates */}
+              </section>              {/* Updates */}
               <section className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6 flex items-center">
-                  <span className="mr-3">🔄</span> Policy Updates
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#283d50] mb-6">
+                  Policy Updates
                 </h2>
                 
                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
@@ -355,19 +326,16 @@ const PrivacyPolicySimple = () => {
                   
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="flex items-center">
-                      <span className="text-xl mr-2">📅</span>
                       <span className="text-sm text-gray-700">Update the date above</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-xl mr-2">📢</span>
                       <span className="text-sm text-gray-700">Notify of major changes</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-xl mr-2">📄</span>
                       <span className="text-sm text-gray-700">Post updated policy here</span>
                     </div>
                   </div>
-                </div>              </section>
+                </div></section>
             </div>
           </div>
         </div>
