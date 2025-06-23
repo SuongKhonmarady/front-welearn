@@ -39,7 +39,7 @@ export default function Hero() {
         </div>
         <div className="flex flex-col sm:flex-row gap-4 mt-6">
           <Link 
-            to="/browse" 
+            to="/browse-scholarships" 
             className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-lg text-white bg-[#283d50] hover:bg-[#1e2d3d] transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
             aria-label="Browse available scholarships and start your educational journey"
           >

@@ -61,13 +61,14 @@ export default function ScholarshipCard({ scholarship }) {
                 Open
               </>
             )}
-          </div>
-        </div>
+          </div>        </div>
         
-        {/* Degree Badge */}
-        <div className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-          🎓 {displayDegree}
-        </div>
+        {/* Degree Badge - Only show if degree is available */}
+        {degree_offered && (
+          <div className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+            🎓 {displayDegree}
+          </div>
+        )}
       </div>
       
       {/* Card Content */}
