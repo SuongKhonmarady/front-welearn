@@ -90,7 +90,7 @@ const ScholarshipDetailPage = () => {
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#283d50] to-[#1e3a5f] text-white">
+        <div className="bg-gradient-to-r from-[#2b475f] to-[#1e3a5f] text-white">
           <div className="max-w-6xl mx-auto px-4 py-6">
             <button
               onClick={handleGoBack}
@@ -301,7 +301,7 @@ const ScholarshipDetailPage = () => {
                   {/* Additional Resource Links */}
                   <div className="border-t pt-3 mt-3">
                     <a
-                      href="/browse"
+                      href="/browse-scholarships"
                       className="flex items-center justify-center w-full px-4 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors duration-200"
                     >
                       <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

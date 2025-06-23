@@ -3,6 +3,7 @@ import ScholarshipDataContext from "../../../context/scholarship/ScholarshipCont
 import { getScholarship } from "../../../context/scholarship/Scholarship";
 import ScholarshipTimeline from "./components/ScholarshipTimeline";
 import Spinner from "../../../ui/shared/Spinner";
+import SEOHead from "../../../components/SEOHead";
 
 export default function ScholarshipList() {
   const { listScholarship, dispatch, loading } = useContext(ScholarshipDataContext);
@@ -21,7 +22,17 @@ export default function ScholarshipList() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f1f5f9] to-white">
+    <>
+      {/* SEO Head Component */}
+      <SEOHead
+        title="Scholarship Timeline - Track Application Deadlines"
+        description="Stay updated with upcoming scholarship deadlines and never miss an opportunity. Visual timeline of scholarship application dates and deadlines."
+        keywords="scholarship timeline, application deadlines, scholarship calendar, education funding timeline, student grants deadlines"
+        url="/scholarship-timeline"
+        type="website"
+      />
+      
+      <div className="min-h-screen bg-gradient-to-b from-[#f1f5f9] to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
@@ -36,5 +47,6 @@ export default function ScholarshipList() {
         <ScholarshipTimeline scholarships={listScholarship} />
       </div>
     </div>
+    </>
   );
 }

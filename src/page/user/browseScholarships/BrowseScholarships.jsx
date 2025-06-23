@@ -8,6 +8,7 @@ import {
 } from "../../../context/scholarship/Scholarship";
 import useDebounce from '../../../hook/useDebounce';
 import ScholarshipCard from './components/ScholarshipCard';
+import SEOHead from '../../../components/SEOHead';
 
 export default function BrowseScholarships() {
   const [scholarships, setScholarships] = useState([]);
@@ -177,9 +178,18 @@ export default function BrowseScholarships() {
   // Update displayed results when filteredResults changes
   useEffect(() => {
     setDisplayedResults(filteredResults.slice(0, ITEMS_PER_PAGE));
-    setCurrentPage(1);
-  }, [filteredResults]);  return (
-    <div className="min-h-screen bg-gray-50">
+    setCurrentPage(1);  }, [filteredResults]);  return (
+    <>
+      {/* SEO Head Component */}
+      <SEOHead
+        title="Browse Scholarships - Find Your Perfect Educational Opportunity"
+        description="Discover thousands of scholarship opportunities from universities and organizations worldwide. Filter by location, degree level, or search by specific criteria to find your perfect match."
+        keywords="scholarships, education funding, university scholarships, international scholarships, student grants, financial aid, study abroad"
+        url="/browse-scholarships"
+        type="website"
+      />
+      
+      <div className="min-h-screen bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 py-6">
         {/* Simplified Hero Section */}
         <div className="text-center mb-8">
@@ -471,13 +481,13 @@ export default function BrowseScholarships() {
                     className="px-4 py-2 border border-slate-800 text-slate-800 rounded-lg hover:bg-slate-800 hover:text-white transition-colors font-medium text-sm"
                   >
                     Refresh
-                  </button>
-                </div>
+                  </button>                </div>
               </div>
             )}
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }
