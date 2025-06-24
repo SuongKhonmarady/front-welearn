@@ -97,7 +97,7 @@ export default function Account() {
       {/* SEO Head Component */}
       <SEOHead
         title="My Profile - Account Settings"
-        description="Manage your OpenScholarships account profile, preferences, and settings. Update your information and customize your scholarship discovery experience."
+        description="Manage your OpenScholarships profile and account settings. Update your information and preferences."
         keywords="user profile, account settings, scholarship profile, education preferences"
         url="/account"
         type="website"

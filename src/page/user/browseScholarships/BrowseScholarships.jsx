@@ -180,10 +180,9 @@ export default function BrowseScholarships() {
     setDisplayedResults(filteredResults.slice(0, ITEMS_PER_PAGE));
     setCurrentPage(1);  }, [filteredResults]);  return (
     <>
-      {/* SEO Head Component */}
-      <SEOHead
+      {/* SEO Head Component */}      <SEOHead
         title="Browse Scholarships - Find Your Perfect Educational Opportunity"
-        description="Discover thousands of scholarship opportunities from universities and organizations worldwide. Filter by location, degree level, or search by specific criteria to find your perfect match."
+        description="Discover thousands of scholarship opportunities worldwide. Filter by location, degree level, and criteria to find your perfect match."
         keywords="scholarships, education funding, university scholarships, international scholarships, student grants, financial aid, study abroad"
         url="/browse-scholarships"
         type="website"
