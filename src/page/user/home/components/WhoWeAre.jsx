@@ -5,7 +5,7 @@ export default function WhoWeAre() {
     <div className="flex flex-col gap-5 bg-gradient-to-r from-blue-500">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center">
         <div className="md:w-1/3 hidden md:block">
-          <img src={team} alt="" className="w-full h-full" />
+          <img src={team} alt="Team collaboration illustration" className="w-full h-full" />
         </div>
         <div className="flex flex-col gap-5 md:w-1/2 p-5">
           <h2 className="text-3xl font-semibold text-center">Who We Are</h2>

@@ -28,8 +28,8 @@ export default function Navbar() {
   }, []);
 
   const Links = [
-    { name: "browse scholarships", link: "/browse-scholarships", image: school },
-    { name: "scholarship timeline", link: "/scholarship-timeline", image: school },
+    { name: "browse scholarships", link: "/browse-scholarships", image: school, alt: "Browse scholarships icon" },
+    { name: "scholarship timeline", link: "/scholarship-timeline", image: school, alt: "Scholarship timeline icon" },
     // { name: "AI Assistant", link: "/chatbot", image: school },
     // { name: "Account", link: "/account", image: school },
   ];
@@ -46,7 +46,7 @@ export default function Navbar() {
             <ul className="hidden md:inline-flex">
               {Links.map((link) => (
                 <li key={link.name} className="flex px-2 uppercase items-center">
-                  <img className="h-5 w-5 mr-2" src={link.image} alt="" />
+                  <img className="h-5 w-5 mr-2" src={link.image} alt={link.alt} />
                   <Link
                     to={link.link}
                     className="text-gray-800 hover:text-gray-400"

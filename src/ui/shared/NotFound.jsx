@@ -6,7 +6,7 @@ export default function NotFound() {
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="flex flex-col gap-5 items-center">
           <p>No data found</p>
-          <img src={Empty} alt="" className="w-[50%] h-[50%]" />
+          <img src={Empty} alt="No data found illustration" className="w-[50%] h-[50%]" />
         </div>
       </div>
     </section>
