@@ -147,7 +147,7 @@ export default function LatestScholarships() {
             {scholarships.length > 0 && (
               <div className="text-center mt-12">
                 <Link
-                  to="/browse"
+                  to="/browse-scholarships"
                   className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#283d50] hover:bg-[#1e2d3d] transition-colors duration-200 shadow-lg hover:shadow-xl"
                   aria-label="View all available scholarships"
                 >
