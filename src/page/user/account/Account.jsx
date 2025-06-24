@@ -8,6 +8,7 @@ import editUserIcon from "../../../assets/svg/editUser.svg";
 import close from "../../../assets/svg/close.svg";
 import UserDataContext from "../../../context/user/UserContext";
 import Spinner from "../../../ui/shared/Spinner";
+import SEOHead from "../../../components/SEOHead";
 
 export default function Account() {
   const navigate = useNavigate();
@@ -92,7 +93,18 @@ export default function Account() {
   }
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4">
+    <>
+      {/* SEO Head Component */}
+      <SEOHead
+        title="My Profile - Account Settings"
+        description="Manage your OpenScholarships account profile, preferences, and settings. Update your information and customize your scholarship discovery experience."
+        keywords="user profile, account settings, scholarship profile, education preferences"
+        url="/account"
+        type="website"
+        noIndex={true}
+      />
+      
+      <div className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg overflow-hidden">
         <div className="relative bg-gradient-to-r from-[#283d50] to-[#1e2d3d] text-white p-8">
           <div className="absolute top-4 right-4">
@@ -226,5 +238,6 @@ export default function Account() {
         </form>
       </div>
     </div>
+    </>
   );
 }

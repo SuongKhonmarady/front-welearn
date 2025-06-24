@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import ChatInterface from './components/ChatInterface';
 import HeroSection from './components/HeroSection';
 import { formatMessage } from './components/MessageFormatter';
+import SEOHead from '../../../components/SEOHead';
 
 export default function ChatbotPage() {
   const [messages, setMessages] = useState([]);
@@ -64,10 +65,19 @@ I'll help find the perfect opportunities for you! 🎓`,
     setMessages([{
       role: 'assistant',
       content: '👋 Hello! I\'m your ScholarLink Assistant. What kind of scholarship are you looking for? 🎓',
-    }]);
-  };
+    }]);  };
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f1f5f9] to-white">
+    <>
+      {/* SEO Head Component */}
+      <SEOHead
+        title="AI Scholarship Assistant - Get Personalized Recommendations"
+        description="Get personalized scholarship recommendations, application guidance, and answers to all your scholarship-related questions with our AI assistant."
+        keywords="AI scholarship assistant, scholarship chatbot, personalized scholarship recommendations, scholarship guidance, education AI"
+        url="/chatbot"
+        type="website"
+      />
+      
+      <div className="min-h-screen bg-gradient-to-b from-[#f1f5f9] to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <HeroSection />
         <ChatInterface 
@@ -114,12 +124,11 @@ I'll help find the perfect opportunities for you! 🎓`,
         .scrollbar-thin::-webkit-scrollbar-thumb {
           background-color: #D1D5DB;
           border-radius: 3px;
-        }
-
-        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        }        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
           background-color: #9CA3AF;
         }
       `}</style>
     </div>
+    </>
   );
 }
