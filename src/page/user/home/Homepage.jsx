@@ -172,7 +172,7 @@ export default function Homepage() {
         />
         <meta 
           name="description" 
-          content="Find and apply for thousands of scholarships worldwide in 2025. Track deadlines, manage applications, and discover funding opportunities from universities, governments, and organizations globally. Start your educational journey today!" 
+          content="Discover thousands of global scholarships, track deadlines, and manage applications in one platform." 
         />
         <meta 
           name="keywords" 

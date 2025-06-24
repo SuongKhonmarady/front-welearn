@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.677898e2.css",
-    "main.js": "/static/js/main.9325aef4.js",
+    "main.js": "/static/js/main.9d3da41a.js",
     "static/media/logo_.png": "/static/media/logo_.2754c54976598ed860ea.png",
     "static/media/scholarship.png": "/static/media/scholarship.4d367fd79374832985bb.png",
     "static/media/Logo.png": "/static/media/Logo.42230503f0fe9f554ac1.png",
@@ -13,10 +13,10 @@
     "static/media/close.svg": "/static/media/close.0353bb049665f27227f192b97780acbf.svg",
     "static/media/menu.svg": "/static/media/menu.acb0a738689208be3a209bbe37e7c7f2.svg",
     "main.677898e2.css.map": "/static/css/main.677898e2.css.map",
-    "main.9325aef4.js.map": "/static/js/main.9325aef4.js.map"
+    "main.9d3da41a.js.map": "/static/js/main.9d3da41a.js.map"
   },
   "entrypoints": [
     "static/css/main.677898e2.css",
-    "static/js/main.9325aef4.js"
+    "static/js/main.9d3da41a.js"
   ]
 }
