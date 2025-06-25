@@ -1,1 +1,1 @@
-export const REACT_APP_API_ENDPOINT ="http://api.openscholarships.me";
+export const REACT_APP_API_ENDPOINT ="https://api.openscholarships.me";
