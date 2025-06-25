@@ -196,7 +196,7 @@ const DataSources = () => {
               </p>
               <div className="bg-gray-100 p-3 sm:p-4 rounded-lg">
                 <p className="text-sm sm:text-base text-gray-700 mb-2"><strong>Contact for Data Issues:</strong></p>
-                <p className="text-sm sm:text-base text-gray-700">Email: data@openscholarships.me</p>
+                <p className="text-sm sm:text-base text-gray-700">Email: scholarshipsopen@gmail.com</p>
                 <p className="text-sm sm:text-base text-gray-700">Response Time: Within 48 hours</p>
                 <p className="text-xs sm:text-sm text-gray-700 mt-2">We will promptly address any concerns from original content publishers.</p>
               </div>

@@ -5,7 +5,7 @@ import Spinner from '../../../../ui/shared/Spinner';
 import Button from '../../../../ui/shared/Button';
 
 export default function EditScholarshipPage() {
-  const { id } = useParams();
+  const { id, slug } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -28,7 +28,9 @@ export default function EditScholarshipPage() {
     const fetchScholarship = async () => {
       try {
         setLoading(true);
-        const data = await getScholarshipById(id);
+        // Use slug if available, otherwise use id
+        const identifier = slug || id;
+        const data = await getScholarshipById(identifier);
         if (data) {
           setFormData({
             title: data.title || '',
@@ -41,7 +43,8 @@ export default function EditScholarshipPage() {
             host_university: data.host_university || '',
             program_duration: data.program_duration || '',
             degree_offered: data.degree_offered || '',
-            official_link: data.official_link || ''
+            official_link: data.official_link || '',
+            id: data.id // Store the original ID for updates
           });
         } else {
           setError('Scholarship not found');
@@ -54,10 +57,10 @@ export default function EditScholarshipPage() {
       }
     };
 
-    if (id) {
+    if (id || slug) {
       fetchScholarship();
     }
-  }, [id]);
+  }, [id, slug]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,9 +74,14 @@ export default function EditScholarshipPage() {
     e.preventDefault();
     try {
       setSaving(true);
-      const success = await updateScholarship(id, formData);
+      // Use the original ID for updating (updateScholarship expects ID)
+      const scholarshipId = id || (formData.id);
+      const success = await updateScholarship(scholarshipId, formData);
       if (success) {
-        navigate(`/admin/scholarships-management/${id}`);
+        const detailUrl = slug 
+          ? `/admin/scholarships-management/slug/${slug}`
+          : `/admin/scholarships-management/${scholarshipId}`;
+        navigate(detailUrl);
       }
     } catch (error) {
       console.error('Error updating scholarship:', error);
@@ -114,7 +122,12 @@ export default function EditScholarshipPage() {
         <div className="flex items-center justify-between mb-4">
           <Button
             customClass="flex items-center space-x-2 text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200"
-            onClick={() => navigate(`/admin/scholarships-management/${id}`)}
+            onClick={() => {
+              const detailUrl = slug 
+                ? `/admin/scholarships-management/${slug}`
+                : `/admin/scholarships-management/${id}`;
+              navigate(detailUrl);
+            }}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>

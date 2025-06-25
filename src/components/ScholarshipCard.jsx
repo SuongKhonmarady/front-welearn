@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { trackScholarshipView} from '../utils/analytics';
+import { getScholarshipUrl } from '../utils/scholarshipUtils';
 
 export default function ScholarshipCard({ scholarship }) {
   // Track scholarship view when component mounts
@@ -92,7 +93,7 @@ export default function ScholarshipCard({ scholarship }) {
           {/* View Details Button - Always show if scholarship has an ID */}
           {scholarship.id && (
             <Link
-              to={`/scholarship/${scholarship.id}`}
+              to={getScholarshipUrl(scholarship)}
               className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors duration-200 text-center"
             >
               View Details
@@ -114,6 +115,7 @@ export default function ScholarshipCard({ scholarship }) {
 ScholarshipCard.propTypes = {
   scholarship: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    slug: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     host_country: PropTypes.string,

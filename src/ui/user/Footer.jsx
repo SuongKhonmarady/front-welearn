@@ -3,7 +3,7 @@ import Logo from "../../assets/logo_.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="bg-[#283d50] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,7 +14,7 @@ export default function Footer() {
             <Link to="/" className="inline-block">
               <img src={Logo} alt="WeLearn Logo" className="w-[80px] md:w-[100px]" />
             </Link>
-            
+
             <div className="flex space-x-4 pt-2">
               <a href="https://web.facebook.com/profile.php?id=61577632620312" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-300 hover:text-white transition-colors">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -46,7 +46,6 @@ export default function Footer() {
               <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
               <li><Link to="/browse-scholarships" className="hover:text-white transition-colors">Browse scholarship</Link></li>
               <li><Link to="/scholarship-timeline" className="hover:text-white transition-colors">Scholarships timeline</Link></li>
-              <li><Link to="/data-sources" className="hover:text-white transition-colors">Data Sources</Link></li>
               {/* <li><Link to="/rankquiz" className="hover:text-white transition-colors">Quiz</Link></li>
               <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li> */}
             </ul>
@@ -56,11 +55,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-2 text-gray-300">
+              <li><Link to="/data-sources" className="hover:text-white transition-colors">Data Sources</Link></li>
               <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Scholarship Guide</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Application Tips</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Student Resources</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
             </ul>
           </div>
 
@@ -85,8 +83,16 @@ export default function Footer() {
                 <svg className="w-5 h-5 text-gray-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
-                <a href="mailto:openscholarships@gmail.com" className="hover:text-white transition-colors">
-                  openscholarships@gmail.com
+                <a href="mailto:scholarshipsopen@gmail.com" className="hover:text-white transition-colors">
+                  scholarshipsopen@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center">
+                <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
+                </svg>
+                <a href="https://web.facebook.com/profile.php?id=61577632620312" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  OpenScholarships Facebook
                 </a>
               </li>
             </ul>

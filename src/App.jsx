@@ -50,7 +50,9 @@ export default function App() {
                 <Route path="/admin/scholarships-management" element={<ScholarshipsManagementPage />} />
                 <Route path="/admin/scholarships-management/create" element={<CreateScholarshipPage />} />
                 <Route path="/admin/scholarships-management/:id" element={<AdminScholarshipDetailPage />} />
+                <Route path="/admin/scholarships-management/:slug" element={<AdminScholarshipDetailPage />} />
                 <Route path="/admin/scholarships-management/edit/:id" element={<EditScholarshipPage />} />
+                <Route path="/admin/scholarships-management/edit/:slug" element={<EditScholarshipPage />} />
               </Route>
             </Route>
             
@@ -59,6 +61,7 @@ export default function App() {
               <Route index element={<Homepage />} />
               <Route path="/browse-scholarships" element={<BrowseScholarships />} />
               <Route path="/scholarship/:id" element={<ScholarshipDetailPage />} />
+              <Route path="/:slug" element={<ScholarshipDetailPage />} />
               <Route path="/chatbot" element={<ChatbotPage />} />
               <Route path="/scholarship-timeline" element={<Scholarship />} />
               <Route path="/authentication" element={<Authentication />} />

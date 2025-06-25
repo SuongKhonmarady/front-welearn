@@ -46,10 +46,16 @@ export const getScholarship = async () => {
   }
 };
 
-// Get scholarship by ID
-export const getScholarshipById = async (id) => {
+// Get scholarship by ID or slug
+export const getScholarshipById = async (identifier) => {
   try {
-    const res = await apiClient.get(`api/scholarship/${id}`);
+    // Check if identifier is numeric (ID) or string (slug)
+    const isNumeric = /^\d+$/.test(identifier);
+    const endpoint = isNumeric 
+      ? `api/scholarship/${identifier}`
+      : `api/scholarship/${identifier}`;
+    
+    const res = await apiClient.get(endpoint);
     if (res.status === 200) {
       return res.data.data;
     }

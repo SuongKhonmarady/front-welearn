@@ -6,7 +6,7 @@ import Spinner from '../../../../ui/shared/Spinner';
 import Button from '../../../../ui/shared/Button';
 
 export default function ScholarshipDetailPage() {
-  const { id } = useParams();
+  const { id, slug } = useParams();
   const navigate = useNavigate();
   const [scholarship, setScholarship] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,9 @@ export default function ScholarshipDetailPage() {
     const fetchScholarshipDetail = async () => {
       try {
         setLoading(true);
-        const data = await getScholarshipById(id);
+        // Use slug if available, otherwise use id
+        const identifier = slug || id;
+        const data = await getScholarshipById(identifier);
         if (data) {
           setScholarship(data);
         } else {
@@ -30,10 +32,10 @@ export default function ScholarshipDetailPage() {
       }
     };
 
-    if (id) {
+    if (id || slug) {
       fetchScholarshipDetail();
     }
-  }, [id]);
+  }, [id, slug]);
 
   const formatDate = (dateString) => {
     if (!dateString) return 'Not specified';
@@ -137,7 +139,12 @@ export default function ScholarshipDetailPage() {
           <div className="flex space-x-3">
             <Button
               customClass="bg-amber-600 text-white hover:bg-amber-700"
-              onClick={() => navigate(`/admin/scholarships-management/edit/${scholarship.id}`)}
+              onClick={() => {
+                const editUrl = slug 
+                  ? `/admin/scholarships-management/edit/slug/${slug}`
+                  : `/admin/scholarships-management/edit/${scholarship.id}`;
+                navigate(editUrl);
+              }}
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>

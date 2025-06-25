@@ -4,6 +4,7 @@ import { DataSet, Timeline } from "vis-timeline/standalone";
 import moment from "moment";
 import "vis-timeline/styles/vis-timeline-graph2d.min.css";
 import PropTypes from "prop-types";
+import { getScholarshipUrl } from '../../../../utils/scholarshipUtils';
 
 export default function ScholarshipTimeline({ scholarships }) {
   const navigate = useNavigate();
@@ -104,8 +105,8 @@ export default function ScholarshipTimeline({ scholarships }) {
 
       const selected = scholarships.find((s) => s.id === selectedId);
       if (selected) {
-        // Navigate to the scholarship detail page
-        navigate(`/scholarship/${selected.id}`);
+        // Navigate to the scholarship detail page using slug if available
+        navigate(getScholarshipUrl(selected));
       }
     });
   }, [scholarships, view, navigate]);

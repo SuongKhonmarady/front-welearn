@@ -5,7 +5,7 @@ import { getScholarshipById } from "../../../context/scholarship/Scholarship";
 import SEOHead from "../../../components/SEOHead";
 
 const ScholarshipDetailPage = () => {
-  const { id } = useParams();
+  const { id, slug } = useParams();
   const navigate = useNavigate();
   const [scholarship, setScholarship] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,9 @@ const ScholarshipDetailPage = () => {
       try {
         setLoading(true);
         setError(null);
-        const scholarshipData = await getScholarshipById(id);
+        // Use slug if available, otherwise use id
+        const identifier = slug || id;
+        const scholarshipData = await getScholarshipById(identifier);
         setScholarship(scholarshipData);
       } catch (error) {
         setError("Failed to load scholarship details. Please try again.");
@@ -26,10 +28,10 @@ const ScholarshipDetailPage = () => {
       }
     };
 
-    if (id) {
+    if (id || slug) {
       fetchScholarship();
     }
-  }, [id]);
+  }, [id, slug]);
 
   const handleGoBack = () => navigate(-1);
 
@@ -84,7 +86,7 @@ const ScholarshipDetailPage = () => {
         title={scholarship.title ? `${scholarship.title.substring(0, 40)}` : 'Scholarship Details'}
         description={scholarship.description ? `${scholarship.description.substring(0, 150)}...` : 'Detailed information about this scholarship opportunity.'}
         keywords={`scholarship, ${scholarship.provider || 'education'}, ${scholarship.hostCountry || 'international'}, funding, education`}
-        url={`/scholarship/${id}`}
+        url={`/${slug || `scholarship/${id}`}`}
         type="article"
       />
       

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import { getScholarshipUrl } from '../../../../utils/scholarshipUtils';
 
 export default function ScholarshipCard({ scholarship }) {
   const navigate = useNavigate();
@@ -132,7 +133,7 @@ export default function ScholarshipCard({ scholarship }) {
       </div>      {/* Card Footer */}
       <div className="p-4 pt-0 mt-auto">
         <button
-          onClick={() => navigate(`/scholarship/${scholarship.id}`)}
+          onClick={() => navigate(getScholarshipUrl(scholarship))}
           className="w-full bg-slate-800 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-slate-700 transition-colors duration-200 flex items-center justify-center gap-2 text-sm"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -150,6 +151,7 @@ export default function ScholarshipCard({ scholarship }) {
 ScholarshipCard.propTypes = {
   scholarship: PropTypes.shape({
     id: PropTypes.number,
+    slug: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     deadline: PropTypes.string.isRequired,

@@ -11,12 +11,29 @@ const ScholarshipItem = ({ data, onRefresh }) => {
   }
   const {
     id,
+    slug,
     title,
     description,
     deadline,
     host_country,
     host_university
   } = data
+
+  // Generate admin URL for scholarship detail
+  const getAdminScholarshipUrl = () => {
+    if (slug) {
+      return `/admin/scholarships-management/${slug}`;
+    }
+    return `/admin/scholarships-management/${id}`;
+  };
+
+  // Generate admin URL for scholarship edit
+  const getAdminScholarshipEditUrl = () => {
+    if (slug) {
+      return `/admin/scholarships-management/edit/${slug}`;
+    }
+    return `/admin/scholarships-management/edit/${id}`;
+  };
 
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this scholarship?')) {
@@ -52,7 +69,7 @@ const ScholarshipItem = ({ data, onRefresh }) => {
           <div className="flex-1">
             <h3 
               className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600 cursor-pointer transition-colors"
-              onClick={() => navigate(`/admin/scholarships-management/${id}`)}
+              onClick={() => navigate(getAdminScholarshipUrl())}
             >
               {title}
             </h3>
@@ -60,7 +77,7 @@ const ScholarshipItem = ({ data, onRefresh }) => {
           </div>
           <div className="flex space-x-2 ml-4">
             <button
-              onClick={() => navigate(`/admin/scholarships-management/${id}`)}
+              onClick={() => navigate(getAdminScholarshipUrl())}
               className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
               title="View Details"
             >
@@ -70,7 +87,7 @@ const ScholarshipItem = ({ data, onRefresh }) => {
               </svg>
             </button>
             <button
-              onClick={() => navigate(`/admin/scholarships-management/edit/${id}`)}
+              onClick={() => navigate(getAdminScholarshipEditUrl())}
               className="p-2 text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
               title="Edit"
             >
@@ -118,6 +135,7 @@ const ScholarshipItem = ({ data, onRefresh }) => {
 ScholarshipItem.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    slug: PropTypes.string,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     post_at: PropTypes.string,
